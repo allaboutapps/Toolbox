@@ -7,7 +7,7 @@ open class Coordinator: NSObject {
     public weak var parentCoordinator: Coordinator?
     
     public var childCoordinators = [Coordinator]()
-    public var presentationDelegate: CoordinatorPresentationDelegate?
+    private var presentationDelegate: CoordinatorPresentationDelegate?
     
     public let rootViewController: UIViewController
 
