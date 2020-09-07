@@ -15,13 +15,13 @@ open class Coordinator: NSObject {
         self.rootViewController = rootViewController
     }
     
-    func addChild(_ coordinator: Coordinator) {
+    public func addChild(_ coordinator: Coordinator) {
         print("add child: \(String(describing: coordinator.self))")
         childCoordinators.append(coordinator)
         coordinator.parentCoordinator = self
     }
     
-    func removeChild(_ coordinator: Coordinator) {
+    public func removeChild(_ coordinator: Coordinator) {
         if let index = childCoordinators.firstIndex(of: coordinator) {
             print("remove child: \(String(describing: coordinator.self))")
             let removedCoordinator = childCoordinators.remove(at: index)
@@ -29,7 +29,7 @@ open class Coordinator: NSObject {
         }
     }
     
-    func removeAllChildren() {
+    public func removeAllChildren() {
         for coordinator in childCoordinators {
             removeChild(coordinator)
         }
@@ -37,7 +37,7 @@ open class Coordinator: NSObject {
     
     // MARK: - Present
     
-    func present(_ coordinator: Coordinator, animated: Bool, completion: (() -> Void)? = nil) {
+    public func present(_ coordinator: Coordinator, animated: Bool, completion: (() -> Void)? = nil) {
         let delegate = CoordinatorPresentationDelegate(for: coordinator)
         delegate.didDismiss = { [weak self, weak coordinator] in
             guard let self = self, let coordinator = coordinator else { return }
@@ -49,7 +49,7 @@ open class Coordinator: NSObject {
         rootViewController.present(coordinator.rootViewController, animated: animated, completion: completion)
     }
     
-    func dismissChildCoordinator(animated: Bool, completion: (() -> Void)? = nil) {
+    public func dismissChildCoordinator(animated: Bool, completion: (() -> Void)? = nil) {
         guard let coordinator = childCoordinators.first(where: { $0.rootViewController.presentingViewController != nil }) else { return }
  
         print("dismiss coordinator")
@@ -62,7 +62,7 @@ open class Coordinator: NSObject {
     
     // MARK: - Debug
     
-    func debugStructure(level: Int = 0) -> String {
+    public func debugStructure(level: Int = 0) -> String {
         let tabsRoot = String(repeating: "\t", count: level)
         let tabs = String(repeating: "\t", count: level + 1)
         
@@ -86,14 +86,14 @@ open class Coordinator: NSObject {
         return output
     }
     
-    func debugInfo(level: Int) -> String {
+    public func debugInfo(level: Int) -> String {
         var output = ""
         let tabs = String(repeating: "\t", count: level + 1)
         output += tabs + "* \(self)\n"
         return output
     }
     
-    func printRootDebugStructure() {
+    public func printRootDebugStructure() {
         if let parentCoordinator = parentCoordinator {
             parentCoordinator.printRootDebugStructure()
         } else {
@@ -117,7 +117,7 @@ class CoordinatorPresentationDelegate: NSObject, UIAdaptivePresentationControlle
     var didDismiss: (() -> Void)?
     var didAttemptToDismiss: (() -> Void)?
     
-    init(for coordinator: Coordinator) {
+    public init(for coordinator: Coordinator) {
         self.coordinator = coordinator
         super.init()
         
@@ -127,17 +127,17 @@ class CoordinatorPresentationDelegate: NSObject, UIAdaptivePresentationControlle
 
     // MARK: UIAdaptivePresentationControllerDelegate
     
-    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+    public func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
         print("presentationControllerWillDismiss")
         willDismiss?()
     }
     
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         print("presentationControllerDidDismiss")
         didDismiss?()
     }
 
-    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+    public func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         print("presentationControllerDidAttemptToDismiss")
         didAttemptToDismiss?()
     }

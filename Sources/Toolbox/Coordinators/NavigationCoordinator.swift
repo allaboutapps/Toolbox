@@ -23,7 +23,7 @@ open class NavigationCoordinator: Coordinator {
         }
     }
     
-    func removePushedViewController(_ viewController: UIViewController) {
+    public func removePushedViewController(_ viewController: UIViewController) {
         if let index = pushedViewControllers.firstIndex(of: viewController) {
             pushedViewControllers.remove(at: index)
             print("remove: \(pushedViewControllers.count) from \(self)")
@@ -36,37 +36,37 @@ open class NavigationCoordinator: Coordinator {
     
     // MARK: ViewController
     
-    func push(_ viewController: UIViewController, animated: Bool) {
+    public func push(_ viewController: UIViewController, animated: Bool) {
         pushedViewControllers.append(viewController)
         print("append: \(pushedViewControllers.count)")
         
         navigationController.pushViewController(viewController, animated: animated)
     }
     
-    @objc func popViewController(animated: Bool) {
+    @objc public func popViewController(animated: Bool) {
         if let viewController = navigationController.popViewController(animated: animated) {
             removePushedViewController(viewController)
         }
     }
     
-    func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
+    public func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
         navigationController.present(viewController, animated: animated, completion: completion)
     }
     
-    func dismiss(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
+    public func dismiss(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
         viewController.presentingViewController?.dismiss(animated: animated, completion: completion)
     }
     
     // MARK: Coordinator
     
-    func push(_ coordinator: Coordinator, animated: Bool) {
+    public func push(_ coordinator: Coordinator, animated: Bool) {
         addChild(coordinator)
         if let navigationCoordinator = coordinator as? NavigationCoordinator {
             navigationController.delegate = navigationCoordinator // hand delegate to last coordinator
         }
     }
     
-    func popCoordinator(animated: Bool) {
+    public func popCoordinator(animated: Bool) {
         if let lastViewController = pushedViewControllers[pushedViewControllers.count - 1] {
             navigationController.popToViewController(lastViewController, animated: animated)
         }
@@ -78,7 +78,7 @@ open class NavigationCoordinator: Coordinator {
     
     // MARK: Reset
     
-    func popToRoot(animated: Bool) {
+    public func popToRoot(animated: Bool) {
         removeAllChildren()
         
         if let first = pushedViewControllers[0] {
@@ -91,7 +91,7 @@ open class NavigationCoordinator: Coordinator {
 
     // MARK: - Debug
     
-    override func debugInfo(level: Int = 0) -> String {
+    override public func debugInfo(level: Int = 0) -> String {
         var output = ""
         let tabs = String(repeating: "\t", count: level + 1)
         output += tabs + "* \(self)\n"
