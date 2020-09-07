@@ -1,6 +1,6 @@
 import UIKit
 
-class NavigationCoordinator: Coordinator {
+public class NavigationCoordinator: Coordinator {
     
     var pushedViewControllers: WeakArray<UIViewController>
     let navigationController: UINavigationController
@@ -10,7 +10,7 @@ class NavigationCoordinator: Coordinator {
         return childCoordinators.first
     }
     
-    init(navigationController: UINavigationController = UINavigationController()) {
+    public init(navigationController: UINavigationController = UINavigationController()) {
         self.pushedViewControllers = WeakArray([])
         self.navigationController = navigationController
         
@@ -111,7 +111,7 @@ class NavigationCoordinator: Coordinator {
 
 extension NavigationCoordinator: UINavigationControllerDelegate {
     
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         // ensure the view controller is popping
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),
             navigationController.viewControllers.contains(fromViewController) == false
@@ -125,7 +125,7 @@ extension NavigationCoordinator: UINavigationControllerDelegate {
 
 extension NavigationCoordinator: UIGestureRecognizerDelegate {
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }

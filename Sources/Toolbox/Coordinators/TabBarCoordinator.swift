@@ -1,10 +1,10 @@
 import UIKit
 
-class TabBarCoordinator: Coordinator {
+public class TabBarCoordinator: Coordinator {
     
     let tabBarController: UITabBarController
     
-    init(tabBarController: UITabBarController = UITabBarController()) {
+    public init(tabBarController: UITabBarController = UITabBarController()) {
         self.tabBarController = tabBarController
         super.init(rootViewController: tabBarController)
         self.tabBarController.delegate = self
