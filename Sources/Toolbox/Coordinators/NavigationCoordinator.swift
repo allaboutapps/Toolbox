@@ -1,7 +1,6 @@
 import UIKit
 
 open class NavigationCoordinator: Coordinator {
-    
     public var pushedViewControllers: WeakArray<UIViewController>
     public let navigationController: UINavigationController
     
@@ -15,7 +14,7 @@ open class NavigationCoordinator: Coordinator {
         self.navigationController = navigationController
         
         self.navigationController.interactivePopGestureRecognizer?.delegate = nil
-                
+        
         super.init(rootViewController: navigationController)
         
         if self.navigationController.delegate == nil {
@@ -88,10 +87,10 @@ open class NavigationCoordinator: Coordinator {
         navigationController.dismiss(animated: animated, completion: nil)
         navigationController.popToRootViewController(animated: false)
     }
-
+    
     // MARK: - Debug
     
-    override public func debugInfo(level: Int = 0) -> String {
+    public override func debugInfo(level: Int = 0) -> String {
         var output = ""
         let tabs = String(repeating: "\t", count: level + 1)
         output += tabs + "* \(self)\n"
@@ -110,12 +109,11 @@ open class NavigationCoordinator: Coordinator {
 // MARK: UINavigationControllerDelegate
 
 extension NavigationCoordinator: UINavigationControllerDelegate {
-    
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         // ensure the view controller is popping
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),
             navigationController.viewControllers.contains(fromViewController) == false
-            else { return }
+        else { return }
         
         removePushedViewController(fromViewController)
     }
@@ -124,11 +122,9 @@ extension NavigationCoordinator: UINavigationControllerDelegate {
 // MARK: UIGestureRecognizerDelegate
 
 extension NavigationCoordinator: UIGestureRecognizerDelegate {
-    
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
 
-extension NavigationCoordinator {
-}
+extension NavigationCoordinator {}

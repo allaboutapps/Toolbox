@@ -3,14 +3,13 @@ import UIKit
 // MARK: - Coordinator
 
 open class Coordinator: NSObject {
-    
     public weak var parentCoordinator: Coordinator?
     
     public var childCoordinators = [Coordinator]()
     private var presentationDelegate: CoordinatorPresentationDelegate?
     
     public let rootViewController: UIViewController
-
+    
     public init(rootViewController: UIViewController = UIViewController()) {
         self.rootViewController = rootViewController
     }
@@ -51,7 +50,7 @@ open class Coordinator: NSObject {
     
     public func dismissChildCoordinator(animated: Bool, completion: (() -> Void)? = nil) {
         guard let coordinator = childCoordinators.first(where: { $0.rootViewController.presentingViewController != nil }) else { return }
- 
+        
         print("dismiss coordinator")
         
         coordinator.rootViewController.presentingViewController?.dismiss(animated: animated, completion: { [weak self] in
@@ -102,6 +101,7 @@ open class Coordinator: NSObject {
     }
     
     // MARK: - Start
+    
     open func start() {}
     
     deinit {
@@ -112,7 +112,6 @@ open class Coordinator: NSObject {
 // MARK: - CoordinatorPresentationDelegate
 
 class CoordinatorPresentationDelegate: NSObject, UIAdaptivePresentationControllerDelegate {
-    
     weak var coordinator: Coordinator?
     var previousDelegate: UIAdaptivePresentationControllerDelegate?
     
@@ -127,7 +126,7 @@ class CoordinatorPresentationDelegate: NSObject, UIAdaptivePresentationControlle
         previousDelegate = coordinator.rootViewController.presentationController?.delegate
         coordinator.rootViewController.presentationController?.delegate = self
     }
-
+    
     // MARK: UIAdaptivePresentationControllerDelegate
     
     public func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
@@ -139,7 +138,7 @@ class CoordinatorPresentationDelegate: NSObject, UIAdaptivePresentationControlle
         print("presentationControllerDidDismiss")
         didDismiss?()
     }
-
+    
     public func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         print("presentationControllerDidAttemptToDismiss")
         didAttemptToDismiss?()

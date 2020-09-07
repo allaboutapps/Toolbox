@@ -52,6 +52,7 @@ public extension UINavigationBar {
 }
 
 // MARK: - Helper
+
 @available(iOS 11, *)
 public extension UILabel {
     func setStyle(_ style: Style) {

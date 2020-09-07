@@ -3,7 +3,6 @@ import Foundation
 // MARK: - WeakBox
 
 public final class WeakBox<A: AnyObject> {
-    
     weak var unbox: A?
     
     public init(_ value: A) {
@@ -14,7 +13,6 @@ public final class WeakBox<A: AnyObject> {
 // MARK: - WeakArray
 
 public struct WeakArray<Element: AnyObject> {
-    
     private var items: [WeakBox<Element>] = []
     
     public init(_ elements: [Element]) {
@@ -37,7 +35,6 @@ public struct WeakArray<Element: AnyObject> {
 // MARK: Collection
 
 extension WeakArray: Collection {
-    
     public var startIndex: Int { return items.startIndex }
     public var endIndex: Int { return items.endIndex }
     

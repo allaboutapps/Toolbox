@@ -1,7 +1,6 @@
 import UIKit
 
 open class TabBarCoordinator: Coordinator {
-    
     public let tabBarController: UITabBarController
     
     public init(tabBarController: UITabBarController = UITabBarController()) {
@@ -12,7 +11,7 @@ open class TabBarCoordinator: Coordinator {
     
     // MARK: - Debug
     
-    override public func debugInfo(level: Int = 0) -> String {
+    public override func debugInfo(level: Int = 0) -> String {
         var output = ""
         let tabs = String(repeating: "\t", count: level + 1)
         output += tabs + "* \(self)\n"
@@ -29,6 +28,4 @@ open class TabBarCoordinator: Coordinator {
     }
 }
 
-extension TabBarCoordinator: UITabBarControllerDelegate {
-    
-}
+extension TabBarCoordinator: UITabBarControllerDelegate {}
