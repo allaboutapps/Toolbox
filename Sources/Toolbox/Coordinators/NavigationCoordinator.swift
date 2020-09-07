@@ -2,8 +2,8 @@ import UIKit
 
 open class NavigationCoordinator: Coordinator {
     
-    var pushedViewControllers: WeakArray<UIViewController>
-    let navigationController: UINavigationController
+    public var pushedViewControllers: WeakArray<UIViewController>
+    public let navigationController: UINavigationController
     
     // NavigationCoordinator can only have one child coordinator
     var childCoordinator: Coordinator? {

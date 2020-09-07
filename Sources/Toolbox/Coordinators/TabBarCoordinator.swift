@@ -2,7 +2,7 @@ import UIKit
 
 open class TabBarCoordinator: Coordinator {
     
-    let tabBarController: UITabBarController
+    public let tabBarController: UITabBarController
     
     public init(tabBarController: UITabBarController = UITabBarController()) {
         self.tabBarController = tabBarController

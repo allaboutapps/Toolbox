@@ -4,12 +4,12 @@ import UIKit
 
 open class Coordinator: NSObject {
     
-    weak var parentCoordinator: Coordinator?
+    public weak var parentCoordinator: Coordinator?
     
-    var childCoordinators = [Coordinator]()
-    var presentationDelegate: CoordinatorPresentationDelegate?
+    public var childCoordinators = [Coordinator]()
+    public var presentationDelegate: CoordinatorPresentationDelegate?
     
-    let rootViewController: UIViewController
+    public let rootViewController: UIViewController
 
     public init(rootViewController: UIViewController = UIViewController()) {
         self.rootViewController = rootViewController
