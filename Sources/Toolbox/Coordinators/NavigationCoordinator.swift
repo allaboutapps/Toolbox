@@ -104,7 +104,10 @@ open class NavigationCoordinator: Coordinator {
             .joined(separator: ", ")
         output += tabs + "- VCs: [ \(viewControllers) ]\n"
         return output
-    }    
+    }
+    
+    // MARK: - Start
+    public func start() {}
 }
 
 // MARK: UINavigationControllerDelegate
