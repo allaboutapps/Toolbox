@@ -11,7 +11,7 @@ open class Coordinator: NSObject {
     
     let rootViewController: UIViewController
 
-    init(rootViewController: UIViewController = UIViewController()) {
+    public init(rootViewController: UIViewController = UIViewController()) {
         self.rootViewController = rootViewController
     }
     
