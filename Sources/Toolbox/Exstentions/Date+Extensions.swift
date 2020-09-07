@@ -18,6 +18,10 @@ public extension Date {
         return Calendar.current.isDateInWeekend(date)
     }
     
+    static func isDateThisWeek(with date: Date) -> Bool {
+        return Calendar.current.isDate(date, equalTo: Date(), toGranularity: .weekday)
+    }
+    
     static func isDateThisMonth(with date: Date) -> Bool {
         return Calendar.current.isDate(date, equalTo: Date(), toGranularity: .month)
     }
