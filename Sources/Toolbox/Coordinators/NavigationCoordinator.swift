@@ -1,6 +1,6 @@
 import UIKit
 
-public class NavigationCoordinator: Coordinator {
+open class NavigationCoordinator: Coordinator {
     
     var pushedViewControllers: WeakArray<UIViewController>
     let navigationController: UINavigationController

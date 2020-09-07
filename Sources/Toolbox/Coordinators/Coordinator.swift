@@ -2,7 +2,7 @@ import UIKit
 
 // MARK: - Coordinator
 
-public class Coordinator: NSObject {
+open class Coordinator: NSObject {
     
     weak var parentCoordinator: Coordinator?
     

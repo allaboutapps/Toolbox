@@ -1,6 +1,6 @@
 import UIKit
 
-public class TabBarCoordinator: Coordinator {
+open class TabBarCoordinator: Coordinator {
     
     let tabBarController: UITabBarController
     
