@@ -101,6 +101,9 @@ open class Coordinator: NSObject {
         }
     }
     
+    // MARK: - Start
+    public func start() {}
+    
     deinit {
         print("deinit coordinator: \(String(describing: self))")
     }
