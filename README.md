@@ -1,7 +1,7 @@
 # Toolbox
 
-[![Swift 5](https://img.shields.io/badge/Language-Swift%204-orange.svg)](https://developer.apple.com/swift)
-[![SwiftUI](https://img.shields.io/badge/swiftUI-SwiftUI%20Ready-blue)](https://developer.apple.com/swift)
+[![Swift 5](https://img.shields.io/badge/swift5-Swift5-orange)](https://developer.apple.com/swift)
+[![SwiftUI](https://img.shields.io/badge/swiftUI-SwiftUI%20Ready-blue)](https://developer.apple.com/xcode/swiftui/)
 
 
 ## Installation
