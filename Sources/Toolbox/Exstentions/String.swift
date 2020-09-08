@@ -9,8 +9,6 @@ public extension String {
     }
 }
 
-// MARK: - checking isBlank on a string even if optional
-
 public extension Optional where Wrapped == String {
     /// return true if the string is optional, nil, empty, empty space, tab, newline or return
 
@@ -20,12 +18,12 @@ public extension Optional where Wrapped == String {
 }
 
 public extension String {
-    func toInt() -> Int {
-        Int(self)!
+    func toIntOrNil() -> Int? {
+        Int(self)
     }
 
-    func toIntOrNull() -> Int? {
-        Int(self)
+    var isInt: Bool {
+        return Int(self) != nil
     }
 }
 
@@ -37,7 +35,7 @@ public extension String {
 }
 
 public extension String {
-    /// Substring: let string = "0123456789"
+    /// Substring: var string = "0123456789"
     /// string[0...5] //=> "012345"
     subscript(bounds: CountableClosedRange<Int>) -> String {
         let start = index(startIndex, offsetBy: bounds.lowerBound)
@@ -45,6 +43,8 @@ public extension String {
         return String(self[start...end])
     }
 
+    /// Substring: var string = "0123456789"
+    /// string[..<5] //=> "012345"
     subscript(bounds: CountableRange<Int>) -> String {
         let start = index(startIndex, offsetBy: bounds.lowerBound)
         let end = index(startIndex, offsetBy: bounds.upperBound)

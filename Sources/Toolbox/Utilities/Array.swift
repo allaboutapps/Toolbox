@@ -3,7 +3,7 @@ import Foundation
 
 public extension Array where Element: Equatable {
     /// Usage:
-    /// let array = ["foo", "bar"]
+    /// var array = ["foo", "bar"]
     /// array.remove(element: "foo")
     /// array //=> ["bar"]
     @discardableResult
@@ -14,7 +14,7 @@ public extension Array where Element: Equatable {
     }
 
     /// Usage:
-    /// let array = ["foo", "bar"]
+    /// var array = ["foo", "bar"]
     /// array.remove(element: "foo")
     /// array //=> ["bar"]
     @discardableResult
@@ -25,7 +25,7 @@ public extension Array where Element: Equatable {
 
 public extension Array where Element: Hashable {
     /// Usage:
-    /// let array = [1, 2, 3, 3, 2, 1, 4]
+    /// var array = [1, 2, 3, 3, 2, 1, 4]
     /// array.unify() // [1, 2, 3, 4]
     mutating func unify() {
         self = unified()
@@ -34,9 +34,22 @@ public extension Array where Element: Hashable {
 
 public extension Collection where Element: Hashable {
     /// Usage:
-    /// let array = [1, 2, 3, 3, 2, 1, 4]
+    /// var array = [1, 2, 3, 3, 2, 1, 4]
     /// array.unify() // [1, 2, 3, 4]
     func unified() -> [Element] {
         return Array(Set(self))
+    }
+}
+
+extension Array {
+    /// Usage:
+    /// let array = [1, 2, 3, 4]
+    /// array[safeIndex: 6] => nil
+    public subscript(safeIndex index: Int) -> Element? {
+        guard index >= 0, index < endIndex else {
+            return nil
+        }
+
+        return self[index]
     }
 }
