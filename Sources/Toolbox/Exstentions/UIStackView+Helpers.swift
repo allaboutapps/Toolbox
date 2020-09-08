@@ -1,6 +1,7 @@
 
 import UIKit
 
+@available(iOS 9.0, *)
 public extension UIStackView {
     /// Allows to add multiple subviews to a UIStackView at once.
     ///
