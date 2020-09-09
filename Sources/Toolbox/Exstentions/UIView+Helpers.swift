@@ -10,7 +10,6 @@ public extension UIView {
     }
 }
 
-@available(iOS 9.0, *)
 public extension UIView {
     /// Allows to create separator view like => width: 100%, height: 1.0, color: .darkGray
     class func createSeparatorView(width: CGFloat? = nil, height: CGFloat? = nil, color: UIColor = UIColor(white: 0.0, alpha: 0.1), priority: UILayoutPriority = .required) -> UIView {
