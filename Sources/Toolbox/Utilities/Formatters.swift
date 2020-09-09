@@ -54,12 +54,10 @@ public struct Formatters {
 
     // MARK: NumberFormatter
 
-    public struct Number {
-        public static let decimal: NumberFormatter = {
-            let formatter = NumberFormatter()
-            formatter.allowsFloats = true
-            formatter.numberStyle = .decimal
-            return formatter
-        }()
-    }
+    public static let decimalNumber: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = true
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
 }
