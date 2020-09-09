@@ -89,7 +89,7 @@ stackView.addArrangedSubviews(foo, bar)
 Remove all subviews form stackView now easier
 `stackView.removeAllArrangedSubviews()`
 
-### Create separator view on easy way
+### Create separator view on the easy way
 
 ```
 let separatorView = UIView.createSeparatorView(width: UIScreen.main.bounds.width, height: 1.0, color: .gray, priority: .required)
@@ -97,9 +97,9 @@ let separatorView = UIView.createSeparatorView(width: UIScreen.main.bounds.width
 
 ### Style helper
 
-Get rid of using old way to define styles to the UILabel or UIButtons
+Get rid of using the old way to define styles to the UILabel or UIButtons
 
-Old way is inconsistent and in case you need to change font size you need to go all trough and change it manually
+The old way is inconsistent and in case you need to change the font size you need to go all through and change it manually
 ```
 let label = UILabel().with {
     $0.translatesAutoresizingMaskIntoConstraints = false
@@ -115,7 +115,7 @@ A new way with styles
 extension UIColor {
 
     struct App {
-        static let text = .darkText!
+        static let text = .darkText
     }
 }
 
