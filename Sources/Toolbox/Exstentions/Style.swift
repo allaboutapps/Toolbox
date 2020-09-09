@@ -1,7 +1,6 @@
 
 import UIKit
 
-@available(iOS 11.0, *)
 public struct Style {
     public let color: UIColor
     private let _font: UIFont
@@ -16,7 +15,6 @@ public struct Style {
     }
 }
 
-@available(iOS 11.0, *)
 public extension UIFont {
     var scaled: UIFont {
         return UIFontMetrics.default.scaledFont(for: self)
@@ -25,7 +23,6 @@ public extension UIFont {
 
 // MARK: - Navigation bar stle
 
-@available(iOS 11.0, *)
 public struct NavigationBarStyle {
     public let tintColor: UIColor?
     public let barTintColor: UIColor?
@@ -34,7 +31,6 @@ public struct NavigationBarStyle {
     public let statusBarStyle: UIStatusBarStyle
 }
 
-@available(iOS 11.0, *)
 public extension UINavigationBar {
     func setStyle(_ style: NavigationBarStyle) {
         if let tintColor = style.tintColor {
@@ -54,7 +50,6 @@ public extension UINavigationBar {
 
 // MARK: - Helper
 
-@available(iOS 11.0, *)
 public extension UILabel {
     func setStyle(_ style: Style) {
         font = style.font
@@ -62,7 +57,6 @@ public extension UILabel {
     }
 }
 
-@available(iOS 11.0, *)
 public extension UITextField {
     func setStyle(_ style: Style) {
         font = style.font
@@ -70,7 +64,6 @@ public extension UITextField {
     }
 }
 
-@available(iOS 11.0, *)
 public extension UITextView {
     func setStyle(_ style: Style) {
         font = style.font
@@ -78,7 +71,6 @@ public extension UITextView {
     }
 }
 
-@available(iOS 11.0, *)
 public extension String {
     func setStyle(_ style: Style, at subString: String, defaultStyle: Style) -> NSAttributedString {
         let defaultAttributes: [NSAttributedString.Key: Any] = [
