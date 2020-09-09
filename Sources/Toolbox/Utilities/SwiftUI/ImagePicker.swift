@@ -28,7 +28,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     @SwiftUI .Environment(\.presentationMode) var presentationMode
 
     let picker = UIImagePickerController()
-    
+
     var onDenied: VoidClosure?
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
