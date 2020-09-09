@@ -4,6 +4,7 @@ import SwiftUI
 import UIKit
 
 @available(iOS 13.0, *)
+/// SwiftUI 1.0 && iOS13
 struct ImagePicker: UIViewControllerRepresentable {
     class PickerCoordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         let parent: ImagePicker
@@ -23,28 +24,10 @@ struct ImagePicker: UIViewControllerRepresentable {
 
     @Binding var image: UIImage?
     @Binding var sourceType: UIImagePickerController.SourceType
+
     @SwiftUI .Environment(\.presentationMode) var presentationMode
 
     let picker = UIImagePickerController()
-
-    func alertPromptToAllowCameraAccessViaSetting() {
-        let alert = UIAlertController(title: "Want to access your camera", message: "We need your camera to take pictures", preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { (_) -> Void in
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-        })
-
-        let keyWindow = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
-
-        if var topController = keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
-            }
-
-            topController.present(alert, animated: true)
-        }
-    }
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
@@ -57,7 +40,8 @@ struct ImagePicker: UIViewControllerRepresentable {
             case .authorized:
                 return picker
             case .denied, .restricted:
-                alertPromptToAllowCameraAccessViaSetting()
+                // You can implement here a UIAlertController to try again or to ask to go to the settings and enable it from there
+                print("Denied or restricted")
             default:
                 // Not determined fill fall here - after first use, when is't neither authorized, nor denied
                 // we try to use camera, because system will ask itself for camera permissions
