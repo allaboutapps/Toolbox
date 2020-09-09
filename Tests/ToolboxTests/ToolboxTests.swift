@@ -4,19 +4,20 @@ import XCTest
 final class ToolboxTests: XCTestCase {
     // MARK: Array Testing
 
-    func test_ArrayRemove_isRemoved_true() {
+    func testArrayRemoveIsRemovedTrue() {
         var array = ["foo", "bar"]
         array.remove(element: "foo")
-        XCTAssert(array.count == 1)
+        XCTAssertTrue(array.count == 1)
     }
 
-    func test_Array_isUnified_true() {
+    func testArrayIsUnifiedTrue() {
         var array = [1, 2, 3, 3, 2, 1, 4]
         array.unify()
-        XCTAssert(array.count == 4)
+        XCTAssertTrue(array.count == 4)
+        XCTAssertEqual(array.sorted(), [1, 2, 3, 4])
     }
     
-    func test_Array_safeIndex_true() {
+    func testArraySafeIndexTrue() {
         let array = ["foo", "bar"]
         XCTAssertNil(array[safeIndex: 3])
         XCTAssertEqual(array[safeIndex: 1], "bar")
@@ -24,41 +25,41 @@ final class ToolboxTests: XCTestCase {
     
     // MARK: String Testing
     
-    func test_String_isBlank_true() {
+    func testStringIsBlankTrue() {
         let stringIsEmpty = ""
-        XCTAssert(stringIsEmpty.isBlank)
+        XCTAssertTrue(stringIsEmpty.isBlank)
         
         let stringIsNil: String? = nil
-        XCTAssert(stringIsNil.isBlank)
+        XCTAssertTrue(stringIsNil.isBlank)
         
         let stringNewLine = "\n"
-        XCTAssert(stringNewLine.isBlank)
+        XCTAssertTrue(stringNewLine.isBlank)
         
         let stringTabSpacing = "    "
-        XCTAssert(stringTabSpacing.isBlank)
+        XCTAssertTrue(stringTabSpacing.isBlank)
         
         let stringSpacing = " "
-        XCTAssert(stringSpacing.isBlank)
+        XCTAssertTrue(stringSpacing.isBlank)
     }
     
-    func test_String_digitsOnly_true() {
+    func testStringDigitsOnlyTrue() {
         let stringContainsDigitsOnly = "123456"
         XCTAssert(stringContainsDigitsOnly.containsOnlyDigits)
     }
     
-    func test_String_toNil_true() {
+    func testStringToNilTrue() {
         let stringInt = "22a"
         let intString = stringInt.toIntOrNil()
         XCTAssertNil(intString)
     }
     
-    func test_String_toInt_true() {
+    func testStringToIntTrue() {
         let stringInt = "22"
         let intString = stringInt.toIntOrNil()
         XCTAssertEqual(intString, 22)
     }
     
-    func test_String_subscript_true() {
+    func testStringSubscriptTrue() {
         let stringToSubscript = "0123456789"
         
         XCTAssertEqual(stringToSubscript[0...5], "012345")
@@ -68,12 +69,12 @@ final class ToolboxTests: XCTestCase {
     }
 
     static var allTests = [
-        ("test_ArrayRemove_isRemoved_true", test_ArrayRemove_isRemoved_true),
-        ("test_Array_isUnified_true", test_Array_isUnified_true),
-        ("test_String_isBlank_true", test_String_isBlank_true),
-        ("test_String_digitsOnly_true", test_String_digitsOnly_true),
-        ("test_String_toNil_true", test_String_toNil_true),
-        ("test_String_toInt_true", test_String_toInt_true),
-        ("test_String_Subscript_true", test_String_subscript_true)
+        ("testArrayRemoveIsRemovedTrue", testArrayRemoveIsRemovedTrue),
+        ("testArrayIsUnifiedTrue", testArrayIsUnifiedTrue),
+        ("testStringIsBlankTrue", testStringIsBlankTrue),
+        ("testStringDigitsOnlyTrue", testStringDigitsOnlyTrue),
+        ("testStringToNilTrue", testStringToNilTrue),
+        ("testStringToIntTrue", testStringToIntTrue),
+        ("testStringSubscriptTrue", testStringSubscriptTrue)
     ]
 }
