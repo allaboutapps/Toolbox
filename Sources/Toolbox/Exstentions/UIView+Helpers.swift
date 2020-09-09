@@ -33,3 +33,13 @@ public extension UIView {
         return view
     }
 }
+
+public extension UIView {
+    ///
+    /// Loads a view from nib.
+    ///
+    /// *Usage*: let view = CustomView.fromNib()
+    class func fromNib<T: UIView>() -> T {
+        return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+    }
+}
