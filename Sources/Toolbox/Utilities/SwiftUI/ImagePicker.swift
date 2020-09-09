@@ -28,6 +28,8 @@ struct ImagePicker: UIViewControllerRepresentable {
     @SwiftUI .Environment(\.presentationMode) var presentationMode
 
     let picker = UIImagePickerController()
+    
+    var onDenied: VoidClosure?
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
@@ -40,8 +42,7 @@ struct ImagePicker: UIViewControllerRepresentable {
             case .authorized:
                 return picker
             case .denied, .restricted:
-                // You can implement here a UIAlertController to try again or to ask to go to the settings and enable it from there
-                print("Denied or restricted")
+                onDenied?()
             default:
                 // Not determined fill fall here - after first use, when is't neither authorized, nor denied
                 // we try to use camera, because system will ask itself for camera permissions
