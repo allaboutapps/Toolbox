@@ -8,12 +8,17 @@ on:
 
 jobs:
   test:
-
-    runs-on: macos-latest
-
+    name: Run unit tests
+    runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      - name: Force XCode 11.7
+        run: sudo xcode-select -switch /Applications/Xcode_11.7.app
+
+      - name: Generate xcodeproj
+        run: swift package generate-xcodeproj
+
+      - name: Run tests
+        run: xcodebuild test -destination 'name=iPhone 11' -scheme 'Toolbox-Package'
