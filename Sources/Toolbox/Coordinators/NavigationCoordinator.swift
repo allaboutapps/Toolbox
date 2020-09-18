@@ -29,6 +29,7 @@ open class NavigationCoordinator: Coordinator {
             if let parentCoordinator = parentCoordinator as? NavigationCoordinator, pushedViewControllers.isEmpty {
                 parentCoordinator.removeChild(self)
                 navigationController.delegate = parentCoordinator
+                navigationController.presentationController?.delegate = parentCoordinator
             }
         }
     }
@@ -63,6 +64,7 @@ open class NavigationCoordinator: Coordinator {
         if let navigationCoordinator = coordinator as? NavigationCoordinator {
             navigationController.delegate = navigationCoordinator // hand delegate to last coordinator
         }
+        navigationController.presentationController?.delegate = coordinator
     }
     
     public func popCoordinator(animated: Bool) {
