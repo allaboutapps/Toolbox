@@ -4,15 +4,15 @@ import UIKit
 public extension Date {
     
     var isDateYesterday: Bool {
-        Calendar.current.isDateInYesterday(Date())
+        Calendar.current.isDateInYesterday(self)
     }
     
     var isDateToday: Bool {
-        return Calendar.current.isDateInToday(Date())
+        return Calendar.current.isDateInToday(self)
     }
     
     var isDateWeekend: Bool {
-        Calendar.current.isDateInWeekend(Date())
+        Calendar.current.isDateInWeekend(self)
     }
     
     var isDateTomorrow: Bool {
