@@ -72,21 +72,22 @@ final class ToolboxTests: XCTestCase {
     
     func testDates() {
         
-        let isoDateYesterday = "2020-09-22T10:43:31.227Z"
-        let isoDateLastYear = "2015-03-22T10:43:31.227Z"
+        let isoDateInPast = "2020-09-22T10:43:31.227Z"
+        let isoDateInPastYear = "2015-03-22T10:43:31.227Z"
         
         let today = Date()
         
-        let dateYesterday = Formatters.isoDateFormatter.date(from: isoDateYesterday) ?? Date()
-        let dateLastYear = Formatters.isoDateFormatter.date(from: isoDateLastYear) ?? Date()
+        let datePast = Formatters.isoDateFormatter.date(from: isoDateInPast)!
+        let datePastYear = Formatters.isoDateFormatter.date(from: isoDateInPastYear)!
         
-        XCTAssertTrue(dateYesterday.isDateYesterday)
+        XCTAssertTrue(datePast.isDateYesterday)
         XCTAssertFalse(today.isDateTomorrow)
         XCTAssertTrue(today.isDateToday)
+        XCTAssertFalse(datePast.isDateWeekend)
         
-        XCTAssertFalse(dateYesterday.isDateThisWeek(with: today))
-        XCTAssertFalse(dateLastYear.isDateThisMonth(with: today))
-        XCTAssertFalse(dateLastYear.isDateThisYear(with: today))
+        XCTAssertFalse(datePast.isDateThisWeek(with: today))
+        XCTAssertFalse(datePastYear.isDateThisMonth(with: today))
+        XCTAssertFalse(datePastYear.isDateThisYear(with: today))
     }
 
     static var allTests = [

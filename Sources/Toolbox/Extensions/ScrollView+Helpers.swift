@@ -1,16 +1,15 @@
 
 import UIKit
 
-extension UIScrollView {
+public extension UIScrollView {
 
-    var scrolledToTop: Bool {
+    var hasScrolledToTop: Bool {
         let topEdge = 0 - contentInset.top
         return contentOffset.y <= topEdge
     }
 
-    var scrolledToBottom: Bool {
+    var hasScrolledToBottom: Bool {
         let bottomEdge = contentSize.height + contentInset.bottom - bounds.height
         return contentOffset.y >= bottomEdge
     }
-
 }
