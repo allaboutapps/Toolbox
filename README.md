@@ -1,5 +1,6 @@
 # Toolbox
 
+![Master](https://github.com/allaboutapps/Toolbox/workflows/Master/badge.svg?branch=master)
 [![Swift 5](https://img.shields.io/badge/swift5-Swift5-orange)](https://developer.apple.com/swift)
 [![SwiftUI](https://img.shields.io/badge/swiftUI-SwiftUI%20Ready-blue)](https://developer.apple.com/xcode/swiftui/)
 
