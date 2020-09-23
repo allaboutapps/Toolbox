@@ -2,20 +2,21 @@
 import UIKit
 
 public extension Date {
-    static func isDateYesterday(with date: Date) -> Bool {
-        return Calendar.current.isDateInYesterday(date)
+    
+    var isDateYesterday: Bool {
+        Calendar.current.isDateInYesterday(Date())
     }
     
-    static func isDateToday(with date: Date) -> Bool {
-        return Calendar.current.isDateInToday(date)
+    var isDateToday: Bool {
+        return Calendar.current.isDateInToday(Date())
     }
     
-    static func isDateWeekend(with date: Date) -> Bool {
-        return Calendar.current.isDateInWeekend(date)
+    var isDateWeekend: Bool {
+        Calendar.current.isDateInWeekend(Date())
     }
     
-    static func isDateTomorrow(with date: Date) -> Bool {
-        return Calendar.current.isDateInWeekend(date)
+    var isDateTomorrow: Bool {
+        return Calendar.current.isDateInWeekend(Date())
     }
     
     static func isDateThisWeek(with date: Date) -> Bool {

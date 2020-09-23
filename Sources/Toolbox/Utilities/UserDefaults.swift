@@ -1,8 +1,8 @@
 import Foundation
 
 @propertyWrapper
-struct UserDefault<T> {
-    let key: String
+public struct UserDefault<T> {
+    public let key: String
     let defaultValue: T
 
     init(_ key: String, defaultValue: T) {
@@ -10,7 +10,7 @@ struct UserDefault<T> {
         self.defaultValue = defaultValue
     }
 
-    var wrappedValue: T {
+    public var wrappedValue: T {
         get {
             return UserDefaults.standard.object(forKey: key) as? T ?? defaultValue
         }
