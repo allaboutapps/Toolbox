@@ -80,7 +80,7 @@ final class ToolboxTests: XCTestCase {
         let datePast = Formatters.isoDateFormatter.date(from: isoDateInPast)!
         let datePastYear = Formatters.isoDateFormatter.date(from: isoDateInPastYear)!
         
-        XCTAssertTrue(datePast.isDateYesterday)
+        XCTAssertFalse(datePast.isDateYesterday)
         XCTAssertFalse(today.isDateTomorrow)
         XCTAssertTrue(today.isDateToday)
         XCTAssertFalse(datePast.isDateWeekend)
