@@ -85,9 +85,9 @@ final class ToolboxTests: XCTestCase {
         XCTAssertTrue(today.isDateToday)
         XCTAssertFalse(datePast.isDateWeekend)
         
-        XCTAssertFalse(datePast.isDateThisWeek(with: today))
-        XCTAssertFalse(datePastYear.isDateThisMonth(with: today))
-        XCTAssertFalse(datePastYear.isDateThisYear(with: today))
+        XCTAssertFalse(datePast.isDateInSameWeek(with: today))
+        XCTAssertFalse(datePastYear.isDateInSameMonth(with: today))
+        XCTAssertFalse(datePastYear.isDateInSameYear(with: today))
     }
 
     static var allTests = [

@@ -19,15 +19,15 @@ public extension Date {
         return Calendar.current.isDateInTomorrow(self)
     }
     
-    func isDateThisWeek(with date: Date) -> Bool {
+    func isDateInSameWeek(with date: Date) -> Bool {
         return Calendar.current.isDate(date, equalTo: self, toGranularity: .weekday)
     }
     
-    func isDateThisMonth(with date: Date) -> Bool {
+    func isDateInSameMonth(with date: Date) -> Bool {
         return Calendar.current.isDate(date, equalTo: self, toGranularity: .month)
     }
     
-    func isDateThisYear(with date: Date) -> Bool {
+    func isDateInSameYear(with date: Date) -> Bool {
         return Calendar.current.isDate(date, equalTo: self, toGranularity: .year)
     }
 }
