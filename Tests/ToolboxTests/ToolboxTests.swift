@@ -67,6 +67,28 @@ final class ToolboxTests: XCTestCase {
         XCTAssertEqual(stringToSubscript[7...], "789")
         XCTAssertEqual(stringToSubscript[3...5], "345")
     }
+    
+    // MARK: Date Testing
+    
+    func testDates() {
+        
+        let isoDateInPast = "2020-09-22T10:43:31.227Z"
+        let isoDateInPastYear = "2015-03-22T10:43:31.227Z"
+        
+        let today = Date()
+        
+        let datePast = Formatters.isoDateFormatter.date(from: isoDateInPast)!
+        let datePastYear = Formatters.isoDateFormatter.date(from: isoDateInPastYear)!
+        
+        XCTAssertFalse(datePast.isDateYesterday)
+        XCTAssertFalse(today.isDateTomorrow)
+        XCTAssertTrue(today.isDateToday)
+        XCTAssertFalse(datePast.isDateWeekend)
+        
+        XCTAssertFalse(datePast.isDateInSameWeek(with: today))
+        XCTAssertFalse(datePastYear.isDateInSameMonth(with: today))
+        XCTAssertFalse(datePastYear.isDateInSameYear(with: today))
+    }
 
     static var allTests = [
         ("testArrayRemoveIsRemovedTrue", testArrayRemoveIsRemovedTrue),
@@ -75,6 +97,7 @@ final class ToolboxTests: XCTestCase {
         ("testStringDigitsOnlyTrue", testStringDigitsOnlyTrue),
         ("testStringToNilTrue", testStringToNilTrue),
         ("testStringToIntTrue", testStringToIntTrue),
-        ("testStringSubscriptTrue", testStringSubscriptTrue)
+        ("testStringSubscriptTrue", testStringSubscriptTrue),
+        ("testDates", testDates)
     ]
 }

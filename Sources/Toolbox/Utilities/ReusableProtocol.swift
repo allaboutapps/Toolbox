@@ -9,3 +9,5 @@ public extension Reusable {
 }
 
 extension UICollectionViewCell: Reusable {}
+extension UITableViewCell: Reusable {}
+extension UITableViewHeaderFooterView: Reusable {}

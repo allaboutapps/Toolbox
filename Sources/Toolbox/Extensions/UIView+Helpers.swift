@@ -1,11 +1,15 @@
 
 import UIKit
 
+public protocol Nibable: UIView {
+    static func load(from bundle: Bundle) -> Self?
+}
+
 public extension UIView {
     /// Allows to add multiple views at once.
     ///
     /// **Usage:** self.view.add(self.firstSubview, self.secondSubview, etc.).
-    func add(_ subviews: UIView...) {
+    func addSubviews(_ subviews: UIView...) {
         subviews.forEach(addSubview)
     }
 }
@@ -33,12 +37,16 @@ public extension UIView {
     }
 }
 
-public extension UIView {
-    ///
-    /// Loads a view from nib.
-    ///
-    /// *Usage*: let view = CustomView.fromNib()
-    class func fromNib<T: UIView>() -> T {
-        return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+extension UIView: Nibable {
+    
+    /// Tries to load a view from its nib if possible
+    /// - Parameter bundle: The bundle from where to load the nib
+    /// - Returns: Nil if there is no such nib
+    public static func load(from bundle: Bundle = Bundle.main) -> Self? {
+        return loadFromNib(type: self, from: bundle)
+    }
+    
+    private static func loadFromNib<T>(type: T.Type, from bundle: Bundle) -> T? {
+        return bundle.loadNibNamed("\(type)", owner: self, options: nil)?.first as? T
     }
 }

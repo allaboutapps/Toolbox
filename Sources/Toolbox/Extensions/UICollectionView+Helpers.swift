@@ -1,8 +1,9 @@
 
 import UIKit
 
-// To be able to use this, please tag the CustomCollectionViewCell class with the "Reusable" protocol.
 public extension UICollectionView {
+    
+    /// To be able to use this, please tag the CustomCollectionViewCell class with the "Reusable" protocol.
     /// *Usage*: self.register(cellType: CustomCollectionViewCell.self)
     final func register<T: UICollectionViewCell>(cellType: T.Type) {
         register(cellType.self, forCellWithReuseIdentifier: cellType.reuseIdentifier)
@@ -14,7 +15,8 @@ public extension UICollectionView {
                  forSupplementaryViewOfKind: elementKind,
                  withReuseIdentifier: supplementaryType.reuseIdentifier)
     }
-
+    
+    /// To be able to use this, please tag the CustomCollectionViewCell class with the "Reusable" protocol.
     /// *Usage*: if let cell = collectionView.dequeueReusableCell(for: indexPath) as CustomCollectionViewCell {}
     func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath,
                                                       cellType: T.Type) -> T {
@@ -25,7 +27,7 @@ public extension UICollectionView {
         }
         return cell
     }
-
+    
     func dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind elementKind: String,
                                                                        for indexPath: IndexPath,
                                                                        viewType: T.Type) -> T
