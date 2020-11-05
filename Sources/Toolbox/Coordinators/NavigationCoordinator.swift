@@ -49,6 +49,20 @@ open class NavigationCoordinator: Coordinator {
         }
     }
     
+    public func popToViewController(_ viewController: UIViewController, animated: Bool) {
+        guard let poppedViewControllers = navigationController.popToViewController(viewController, animated: animated) else { return }
+        
+        for vc in poppedViewControllers {
+            removePushedViewController(vc)
+        }
+    }
+    
+    public func popToViewControllerOfType<T: UIViewController>(_ type: T.Type, animated: Bool, willPopToViewController: ((T) -> Void)? = nil) {
+        guard let viewController = pushedViewControllers.first(where: { $0 is T }) as? T else { return }
+        willPopToViewController?(viewController)
+        popToViewController(viewController, animated: animated)
+    }
+    
     public func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
         navigationController.present(viewController, animated: animated, completion: completion)
     }
