@@ -57,9 +57,9 @@ open class NavigationCoordinator: Coordinator {
         }
     }
     
-    public func popToViewControllerOfType<T: UIViewController>(_ type: T.Type, animated: Bool, willPopViewController: ((T) -> Void)? = nil) {
+    public func popToViewControllerOfType<T: UIViewController>(_ type: T.Type, animated: Bool, willPopToViewController: ((T) -> Void)? = nil) {
         guard let viewController = pushedViewControllers.first(where: { $0 is T }) as? T else { return }
-        willPopViewController?(viewController)
+        willPopToViewController?(viewController)
         popToViewController(viewController, animated: animated)
     }
     
