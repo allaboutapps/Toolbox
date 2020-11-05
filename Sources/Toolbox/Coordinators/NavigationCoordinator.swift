@@ -50,9 +50,9 @@ open class NavigationCoordinator: Coordinator {
     }
     
     public func popToViewController(_ viewController: UIViewController, animated: Bool) {
-        guard let popedViewControllers = navigationController.popToViewController(viewController, animated: animated) else { return }
+        guard let poppedViewControllers = navigationController.popToViewController(viewController, animated: animated) else { return }
         
-        for vc in popedViewControllers {
+        for vc in poppedViewControllers {
             removePushedViewController(vc)
         }
     }
