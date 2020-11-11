@@ -8,6 +8,6 @@ public extension Reusable {
     static var reuseIdentifier: String { return String(describing: self) }
 }
 
-extension UICollectionViewCell: Reusable {}
+extension UICollectionReusableView: Reusable {}
 extension UITableViewCell: Reusable {}
 extension UITableViewHeaderFooterView: Reusable {}

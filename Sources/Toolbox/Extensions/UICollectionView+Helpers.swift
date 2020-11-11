@@ -10,7 +10,7 @@ public extension UICollectionView {
     }
 
     func register<T: UICollectionReusableView>(supplementaryType: T.Type,
-                                               ofKind elementKind: String) where T: Reusable {
+                                               ofKind elementKind: String) {
         register(supplementaryType.self,
                  forSupplementaryViewOfKind: elementKind,
                  withReuseIdentifier: supplementaryType.reuseIdentifier)
@@ -30,8 +30,7 @@ public extension UICollectionView {
     
     func dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind elementKind: String,
                                                                        for indexPath: IndexPath,
-                                                                       viewType: T.Type) -> T
-        where T: Reusable {
+                                                                       viewType: T.Type) -> T {
         let view = dequeueReusableSupplementaryView(ofKind: elementKind,
                                                     withReuseIdentifier: viewType.reuseIdentifier,
                                                     for: indexPath)
