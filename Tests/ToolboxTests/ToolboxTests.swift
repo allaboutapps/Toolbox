@@ -89,6 +89,73 @@ final class ToolboxTests: XCTestCase {
         XCTAssertFalse(datePastYear.isDateInSameMonth(with: today))
         XCTAssertFalse(datePastYear.isDateInSameYear(with: today))
     }
+    
+    // MARK: SemanticVersion Tests
+    
+    func testSemanticVersion() {
+        // init and description tests
+        // init has to be explicitly written out otherwise a non failable initializer is used(Swift bug?)
+        var version: SemanticVersion? = SemanticVersion.init("1.0.0")
+        XCTAssertNotNil(version)
+        XCTAssertEqual(version?.description, "1.0.0")
+                
+        version = SemanticVersion.init("1.0")
+        XCTAssertNotNil(version)
+        XCTAssertEqual(version?.description, "1.0.0")
+        
+        version = SemanticVersion.init("x.x.x")
+        XCTAssertNil(version)
+        
+        version = SemanticVersion.init("1.0.0-beta.xyz")
+        XCTAssertNil(version)
+        
+        version = SemanticVersion.init("1.0.0+beta.1.2.3")
+        XCTAssertNil(version)
+        
+        //decodable tests
+        
+        struct TestVersion: Codable {
+            let version: SemanticVersion
+        }
+        
+        let decoder = JSONDecoder()
+        
+        var encodedVersion = "{\"version\": \"1.0.0\"}".data(using: .utf8)!
+        XCTAssertNoThrow(try decoder.decode(TestVersion.self, from: encodedVersion))
+        
+        encodedVersion = "{\"version\": \"1.0\"}".data(using: .utf8)!
+        XCTAssertNoThrow(try decoder.decode(TestVersion.self, from: encodedVersion))
+        
+        encodedVersion = "{\"version\": \"x.x.x\"}".data(using: .utf8)!
+        XCTAssertThrowsError(try decoder.decode(TestVersion.self, from: encodedVersion))
+        
+        encodedVersion = "{\"version\": \"1.0.0+beta.1.2.3\"}".data(using: .utf8)!
+        XCTAssertThrowsError(try decoder.decode(TestVersion.self, from: encodedVersion))
+        
+        encodedVersion = "{\"version\": \"1.0.0-beta.xyz\"}".data(using: .utf8)!
+        XCTAssertThrowsError(try decoder.decode(TestVersion.self, from: encodedVersion))
+
+        // comparable tests
+        var version0: SemanticVersion = "1.0.0"
+        var version1: SemanticVersion = "2.0.0"
+        XCTAssertLessThanOrEqual(version0, version1)
+        
+        version0 = "1.0.0"
+        version1 = "1.1.0"
+        XCTAssertLessThanOrEqual(version0, version1)
+        
+        version0 = "1.0.0"
+        version1 = "1.0.1"
+        XCTAssertLessThanOrEqual(version0, version1)
+        
+        version0 = "1.0.0"
+        version1 = "1.1.1"
+        XCTAssertLessThanOrEqual(version0, version1)
+        
+        version0 = "1.1.1"
+        version1 = "2.0.0"
+        XCTAssertLessThanOrEqual(version0, version1)
+    }
 
     static var allTests = [
         ("testArrayRemoveIsRemovedTrue", testArrayRemoveIsRemovedTrue),
@@ -98,6 +165,7 @@ final class ToolboxTests: XCTestCase {
         ("testStringToNilTrue", testStringToNilTrue),
         ("testStringToIntTrue", testStringToIntTrue),
         ("testStringSubscriptTrue", testStringSubscriptTrue),
-        ("testDates", testDates)
+        ("testDates", testDates),
+        ("testSemanticVersion", testSemanticVersion)
     ]
 }
