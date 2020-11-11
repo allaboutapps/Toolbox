@@ -90,6 +90,23 @@ final class ToolboxTests: XCTestCase {
         XCTAssertFalse(datePastYear.isDateInSameYear(with: today))
     }
     
+    // MARK: Auto Layout Helper Tests
+    
+    func testAutoLayoutHelper() {
+        let wrappingView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: 10)))
+        let childView = UIView(frame: .zero)
+        wrappingView.wrap(view: childView, offset: UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
+        
+        wrappingView.setNeedsLayout()
+        wrappingView.layoutIfNeeded()
+        
+        XCTAssert(childView.frame.origin.x == 1)
+        XCTAssert(childView.frame.origin.y == 1)
+        XCTAssert(childView.frame.maxX == wrappingView.bounds.maxX - 1)
+        XCTAssert(childView.frame.maxY == wrappingView.bounds.maxY - 1)
+    }
+    
+    
     // MARK: SemanticVersion Tests
     
     func testSemanticVersion() {
@@ -166,6 +183,7 @@ final class ToolboxTests: XCTestCase {
         ("testStringToIntTrue", testStringToIntTrue),
         ("testStringSubscriptTrue", testStringSubscriptTrue),
         ("testDates", testDates),
+        ("testAutoLayoutHelper", testAutoLayoutHelper),
         ("testSemanticVersion", testSemanticVersion)
     ]
 }
