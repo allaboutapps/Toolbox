@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIView {
+public extension UIView {
     
     /// Adds `self` to `view` as a subview and applies constraints to all edges
     /// - Parameter view: The superview to which the view should be added as a subview
