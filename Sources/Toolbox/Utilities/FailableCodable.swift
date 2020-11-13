@@ -28,7 +28,7 @@ public enum FailableCodable<T: Codable> {
     case failure(Error)
     
     /// If the decoding was successfull a non nil value of type `T`
-    var value: T? {
+    public var value: T? {
         switch self {
         case .success(let value):
             return value
