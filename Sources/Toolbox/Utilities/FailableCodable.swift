@@ -21,7 +21,7 @@ import Foundation
 ///
 /// Without `FailableCodable` the decoding would fail for the entire `Person` and you would have to implement the decoding intializer yourself.
 ///
-enum FailableCodable<T: Codable> {
+public enum FailableCodable<T: Codable> {
     /// Indicates that decoding of the underlying data was successfull
     case success(T)
     /// Indicates that the underlying data failed to decode
