@@ -4,12 +4,12 @@ import UIKit
 @available(iOS 13.0, *)
 open class Keyboard {
     public struct Info {
-        let keyboardBeginFrame: CGRect
-        let keyboardEndFrame: CGRect
-        let animationDuration: TimeInterval
-        let animationOptions: UIView.AnimationOptions
-        
-        var keyboardHeight: CGFloat {
+        public let keyboardBeginFrame: CGRect
+        public let keyboardEndFrame: CGRect
+        public let animationDuration: TimeInterval
+        public let animationOptions: UIView.AnimationOptions
+         
+        public var keyboardHeight: CGFloat {
             return keyboardEndFrame.height
         }
     }
