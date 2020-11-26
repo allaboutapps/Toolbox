@@ -3,7 +3,7 @@ import UIKit
 
 @available(iOS 13.0, *)
 open class Keyboard {
-    struct Info {
+    public struct Info {
         let keyboardBeginFrame: CGRect
         let keyboardEndFrame: CGRect
         let animationDuration: TimeInterval
@@ -14,12 +14,12 @@ open class Keyboard {
         }
     }
     
-    static let shared = Keyboard()
+    public static let shared = Keyboard()
     
     private(set) var isShown: Bool = false
     private var cancellables = Set<AnyCancellable>()
     
-    @Published var info = Info(keyboardBeginFrame: .zero, keyboardEndFrame: .zero, animationDuration: 0.0, animationOptions: [])
+    @Published public var info = Info(keyboardBeginFrame: .zero, keyboardEndFrame: .zero, animationDuration: 0.0, animationOptions: [])
     
     private init() {
         NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification, object: nil)
@@ -61,7 +61,7 @@ open class Keyboard {
 
 @available(iOS 13.0, *)
 public extension UIViewController {
-    internal func updateSafeAreaInsets(keyboardInfo: Keyboard.Info, keyboardFrame: CGRect? = nil, animated: Bool) {
+    func updateSafeAreaInsets(keyboardInfo: Keyboard.Info, keyboardFrame: CGRect? = nil, animated: Bool) {
         let keyboardFrameInView = view.convert(keyboardFrame ?? keyboardInfo.keyboardEndFrame, from: nil)
         let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
         let intersection = safeAreaFrame.intersection(keyboardFrameInView)
@@ -91,7 +91,7 @@ public extension UIViewController {
         view.addGestureRecognizer(recognizer)
     }
     
-    @objc private func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         // Needs to be executed in the next run loop so that buttons have enough time to register being touched
         // before the keyboard disappears.
         DispatchQueue.main.async { [weak self] in
