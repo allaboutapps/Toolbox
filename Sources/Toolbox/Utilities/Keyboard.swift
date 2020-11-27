@@ -53,7 +53,15 @@ open class Keyboard {
         let keyboardBeginFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         let keyboardEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        info = Info(keyboardBeginFrame: keyboardBeginFrame, keyboardEndFrame: keyboardEndFrame, animationDuration: animationDuration, animationOptions: animationOptions)
+        let adjustedKeyboardEndFrame: CGRect
+        
+        if let height = height {
+            adjustedKeyboardEndFrame = CGRect(origin: keyboardEndFrame.origin, size: CGSize(width: keyboardEndFrame.width, height: height))
+        } else {
+            adjustedKeyboardEndFrame = keyboardEndFrame
+        }
+        
+        info = Info(keyboardBeginFrame: keyboardBeginFrame, keyboardEndFrame: adjustedKeyboardEndFrame, animationDuration: animationDuration, animationOptions: animationOptions)
     }
 }
 
