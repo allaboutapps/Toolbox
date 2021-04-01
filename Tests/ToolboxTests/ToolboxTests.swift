@@ -173,6 +173,43 @@ final class ToolboxTests: XCTestCase {
         version1 = "2.0.0"
         XCTAssertLessThanOrEqual(version0, version1)
     }
+    
+    // MARK: Optional Tests
+        
+    func testNestingWithSimpleOptional() {
+        let type = Double?.self
+        XCTAssertTrue(type.nestedType() == Double.self)
+        XCTAssertTrue(type.wrappedType() == Double.self)
+    }
+    
+    func testDeepOptionalNesting() {
+        let type = Double?????.self
+        XCTAssertTrue(type.nestedType() == Double.self)
+        XCTAssertTrue(type.wrappedType() == Double????.self)
+    }
+        
+    func testTypedValueFlattening() {
+        let nestedValue = Optional(Optional(2))
+        let simpleInt = nestedValue.flattenedValue(type: Int.self)
+        XCTAssertTrue(type(of: simpleInt) == Int?.self)
+    }
+    
+    func testNotTypedValueFlattening() {
+        let nestedVal = Optional(Optional(2)) as Any
+        let simpleValue = flattenedValue(of: nestedVal).unsafelyUnwrapped
+        XCTAssertFalse(simpleValue is ExpressibleByNilLiteral)
+    }
+    
+    func testNotNestedOptionalNilValue() {
+        let nothing: Int? = nil
+        XCTAssertNil(nothing.flattenedValue())
+    }
+    
+    func testNonOptionalValueFlattening() {
+        let number = 1
+        let flattenedVal = flattenedValue(of: number).unsafelyUnwrapped
+        XCTAssertTrue(type(of: number) == type(of: flattenedVal))
+    }
 
     static var allTests = [
         ("testArrayRemoveIsRemovedTrue", testArrayRemoveIsRemovedTrue),
@@ -184,6 +221,11 @@ final class ToolboxTests: XCTestCase {
         ("testStringSubscriptTrue", testStringSubscriptTrue),
         ("testDates", testDates),
         ("testAutoLayoutHelper", testAutoLayoutHelper),
-        ("testSemanticVersion", testSemanticVersion)
+        ("testSemanticVersion", testSemanticVersion),
+        ("testNestingWithSimpleOptional", testNestingWithSimpleOptional),
+        ("testDeepOptionalNesting", testDeepOptionalNesting),
+        ("testTypedValueFlattening", testTypedValueFlattening),
+        ("testNotTypedValueFlattening", testNotTypedValueFlattening),
+        ("testNonOptionalValueFlattening", testNonOptionalValueFlattening),
     ]
 }
