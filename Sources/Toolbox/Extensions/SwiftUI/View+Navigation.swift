@@ -3,7 +3,7 @@ import SwiftUI
 // see https://swiftwithmajid.com/2021/01/27/lazy-navigation-in-swiftui/
 
 @available(iOS 13.0, *)
-extension NavigationLink where Label == EmptyView {
+public extension NavigationLink where Label == EmptyView {
     init?<Value>(_ binding: Binding<Value?>, @ViewBuilder destination: (Value) -> Destination) {
         guard let value = binding.wrappedValue else {
             return nil
@@ -19,7 +19,7 @@ extension NavigationLink where Label == EmptyView {
 }
 
 @available(iOS 13.0, *)
-extension View {
+public extension View {
     @ViewBuilder
     func navigate<Value, Destination: View>(using binding: Binding<Value?>, @ViewBuilder destination: (Value) -> Destination) -> some View {
         background(NavigationLink(binding, destination: destination))
