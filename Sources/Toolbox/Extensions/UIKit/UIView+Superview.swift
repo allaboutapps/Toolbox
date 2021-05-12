@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 public extension UIView {
@@ -6,3 +8,5 @@ public extension UIView {
         return superview as? T ?? superview?.resolveSuperviewOf(type: type)
     }
 }
+
+#endif

@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 
 import UIKit
 
@@ -50,3 +51,5 @@ extension UIView: Nibable {
         return bundle.loadNibNamed("\(type)", owner: self, options: nil)?.first as? T
     }
 }
+
+#endif

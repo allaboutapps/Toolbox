@@ -1,9 +1,10 @@
+#if canImport(UIKit)
 
 import AVFoundation
 import SwiftUI
 import UIKit
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 /// SwiftUI 1.0 && iOS13
 struct ImagePicker: UIViewControllerRepresentable {
     class PickerCoordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
@@ -62,3 +63,5 @@ struct ImagePicker: UIViewControllerRepresentable {
         PickerCoordinator(self)
     }
 }
+
+#endif

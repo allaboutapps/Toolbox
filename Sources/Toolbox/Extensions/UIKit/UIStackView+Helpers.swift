@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 
 import UIKit
 
@@ -19,3 +20,5 @@ public extension UIStackView {
         removedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
+
+#endif

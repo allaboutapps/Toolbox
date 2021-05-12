@@ -92,7 +92,10 @@ final class ToolboxTests: XCTestCase {
     
     // MARK: Auto Layout Helper Tests
     
+
     func testAutoLayoutHelper() {
+        #if canImport(UIKit)
+        
         let wrappingView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: 10)))
         let childView = UIView(frame: .zero)
         wrappingView.wrap(view: childView, offset: UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
@@ -104,8 +107,13 @@ final class ToolboxTests: XCTestCase {
         XCTAssert(childView.frame.origin.y == 1)
         XCTAssert(childView.frame.maxX == wrappingView.bounds.maxX - 1)
         XCTAssert(childView.frame.maxY == wrappingView.bounds.maxY - 1)
+        
+        #else
+        
+        XCTAssertTrue(true)
+        
+        #endif
     }
-    
     
     // MARK: SemanticVersion Tests
     

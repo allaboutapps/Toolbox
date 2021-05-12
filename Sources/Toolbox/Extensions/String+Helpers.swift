@@ -1,5 +1,4 @@
-
-import UIKit
+import Foundation
 
 public extension String {
     /// return true if the string is nil, empty, empty space, tab, newline or return

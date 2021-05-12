@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 // MARK: - Coordinator
@@ -117,3 +119,5 @@ extension Coordinator: UIAdaptivePresentationControllerDelegate {
         }
     }
 }
+
+#endif

@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 public extension UIWindow {
@@ -17,3 +19,5 @@ public extension UIWindow {
         return top
     }
 }
+
+#endif

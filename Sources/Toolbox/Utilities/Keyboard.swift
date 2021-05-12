@@ -1,7 +1,9 @@
+#if canImport(UIKit)
+
 import Combine
 import UIKit
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 open class Keyboard {
     public struct Info {
         public let keyboardBeginFrame: CGRect
@@ -67,7 +69,7 @@ open class Keyboard {
 
 // MARK: - UIViewController
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 public extension UIViewController {
     func updateSafeAreaInsets(keyboardInfo: Keyboard.Info, keyboardFrame: CGRect? = nil, animated: Bool) {
         let keyboardFrameInView = view.convert(keyboardFrame ?? keyboardInfo.keyboardEndFrame, from: nil)
@@ -107,3 +109,5 @@ public extension UIViewController {
         }
     }
 }
+
+#endif

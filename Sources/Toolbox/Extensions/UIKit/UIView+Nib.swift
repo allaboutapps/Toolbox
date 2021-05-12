@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 // see http://stackoverflow.com/a/26326006/278288
@@ -47,3 +49,5 @@ public extension UIView {
         }
     }
 }
+
+#endif

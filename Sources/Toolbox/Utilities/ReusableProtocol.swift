@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 public protocol Reusable: AnyObject {
@@ -11,3 +13,5 @@ public extension Reusable {
 extension UICollectionReusableView: Reusable {}
 extension UITableViewCell: Reusable {}
 extension UITableViewHeaderFooterView: Reusable {}
+
+#endif

@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 open class NavigationCoordinator: Coordinator {
@@ -144,3 +146,5 @@ extension NavigationCoordinator: UIGestureRecognizerDelegate {
 }
 
 extension NavigationCoordinator {}
+
+#endif

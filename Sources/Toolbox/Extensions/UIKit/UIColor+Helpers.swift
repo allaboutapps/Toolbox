@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 public extension UIColor {
@@ -52,3 +54,5 @@ public extension UIColor {
         return String(format: "#%06x", rgb)
     }
 }
+
+#endif

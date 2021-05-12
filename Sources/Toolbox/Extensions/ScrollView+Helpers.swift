@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 
 import UIKit
 
@@ -13,3 +14,5 @@ public extension UIScrollView {
         return contentOffset.y >= bottomEdge
     }
 }
+
+#endif

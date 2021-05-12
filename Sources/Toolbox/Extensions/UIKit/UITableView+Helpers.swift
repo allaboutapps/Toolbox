@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 
 import UIKit
 
@@ -49,3 +50,5 @@ public extension UITableView {
         register(nib, forHeaderFooterViewReuseIdentifier: viewType.reuseIdentifier)
     }
 }
+
+#endif

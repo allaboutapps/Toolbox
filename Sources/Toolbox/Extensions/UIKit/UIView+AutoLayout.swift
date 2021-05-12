@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 public extension UIView {
@@ -135,3 +137,5 @@ public extension UIView {
         view.pin(to: self, offset: offset)
     }
 }
+
+#endif

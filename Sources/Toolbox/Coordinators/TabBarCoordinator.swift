@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 open class TabBarCoordinator: Coordinator {
@@ -29,3 +31,5 @@ open class TabBarCoordinator: Coordinator {
 }
 
 extension TabBarCoordinator: UITabBarControllerDelegate {}
+
+#endif
