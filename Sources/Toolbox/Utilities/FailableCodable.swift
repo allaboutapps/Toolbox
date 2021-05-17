@@ -21,7 +21,7 @@ import Foundation
 ///
 /// Without `FailableCodable` the decoding would fail for the entire `Person` and you would have to implement the decoding intializer yourself.
 ///
-public enum FailableCodable<T: Codable> {
+public enum FailableCodable<T: Codable>: Codable {
     /// Indicates that decoding of the underlying data was successfull
     case success(T)
     /// Indicates that the underlying data failed to decode
@@ -37,7 +37,7 @@ public enum FailableCodable<T: Codable> {
         }
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         do {
             self = try .success(decoder.singleValueContainer().decode(T.self))
         } catch {
@@ -45,7 +45,7 @@ public enum FailableCodable<T: Codable> {
         }
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         
         switch self {
