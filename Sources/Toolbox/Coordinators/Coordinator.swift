@@ -113,7 +113,6 @@ open class Coordinator: NSObject {
 extension Coordinator: UIAdaptivePresentationControllerDelegate {
     
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        print("presentationControllerDidDismiss")
         if let parentCoordinator = parentCoordinator {
             parentCoordinator.removeChild(self)
         }
