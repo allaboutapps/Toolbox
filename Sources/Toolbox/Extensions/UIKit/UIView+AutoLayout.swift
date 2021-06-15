@@ -71,8 +71,8 @@ public extension UIView {
     
     func alignEdges(_ view: UIView? = nil, insets: UIEdgeInsets = UIEdgeInsets.init()) -> [NSLayoutConstraint] {
         return [
-            alignLeft(view, constant: insets.left),
-            alignRight(view, constant: -insets.right),
+            alignLeading(view, constant: insets.left),
+            alignTrailing(view, constant: -insets.right),
             alignTop(view, constant: insets.top),
             alignBottom(view, constant: -insets.bottom)
         ]
