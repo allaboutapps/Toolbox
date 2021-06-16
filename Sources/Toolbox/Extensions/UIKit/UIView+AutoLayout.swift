@@ -38,14 +38,6 @@ public extension UIView {
         return trailingAnchor.constraint(equalTo: anchorView(view).trailingAnchor, constant: constant)
     }
     
-    func alignLeft(_ view: UIView? = nil, constant: CGFloat = 0) -> NSLayoutConstraint {
-        return leftAnchor.constraint(equalTo: anchorView(view).leftAnchor, constant: constant)
-    }
-    
-    func alignRight(_ view: UIView? = nil, constant: CGFloat = 0) -> NSLayoutConstraint {
-        return rightAnchor.constraint(equalTo: anchorView(view).rightAnchor, constant: constant)
-    }
-    
     func alignTop(_ view: UIView? = nil, constant: CGFloat = 0) -> NSLayoutConstraint {
         return topAnchor.constraint(equalTo: anchorView(view).topAnchor, constant: constant)
     }
@@ -71,8 +63,8 @@ public extension UIView {
     
     func alignEdges(_ view: UIView? = nil, insets: UIEdgeInsets = UIEdgeInsets.init()) -> [NSLayoutConstraint] {
         return [
-            alignLeft(view, constant: insets.left),
-            alignRight(view, constant: -insets.right),
+            alignLeading(view, constant: insets.left),
+            alignTrailing(view, constant: -insets.right),
             alignTop(view, constant: insets.top),
             alignBottom(view, constant: -insets.bottom)
         ]
