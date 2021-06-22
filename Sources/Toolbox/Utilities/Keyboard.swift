@@ -6,11 +6,19 @@ import UIKit
 @available(iOS 13.0, macOS 10.15, *)
 open class Keyboard {
     public struct Info {
+        
         public let keyboardBeginFrame: CGRect
         public let keyboardEndFrame: CGRect
         public let animationDuration: TimeInterval
         public let animationOptions: UIView.AnimationOptions
          
+        public init(keyboardBeginFrame: CGRect, keyboardEndFrame: CGRect, animationDuration: TimeInterval, animationOptions: UIView.AnimationOptions) {
+            self.keyboardBeginFrame = keyboardBeginFrame
+            self.keyboardEndFrame = keyboardEndFrame
+            self.animationDuration = animationDuration
+            self.animationOptions = animationOptions
+        }
+        
         public var keyboardHeight: CGFloat {
             return keyboardEndFrame.height
         }
@@ -18,7 +26,7 @@ open class Keyboard {
     
     public static let shared = Keyboard()
     
-    private(set) var isShown: Bool = false
+    public private(set) var isShown: Bool = false
     private var cancellables = Set<AnyCancellable>()
     
     @Published public var info = Info(keyboardBeginFrame: .zero, keyboardEndFrame: .zero, animationDuration: 0.0, animationOptions: [])
@@ -70,8 +78,9 @@ open class Keyboard {
 // MARK: - UIViewController
 
 @available(iOS 13.0, macOS 10.15, *)
-public extension UIViewController {
-    func updateSafeAreaInsets(keyboardInfo: Keyboard.Info, keyboardFrame: CGRect? = nil, animated: Bool) {
+extension UIViewController {
+    
+    open func updateSafeAreaInsets(keyboardInfo: Keyboard.Info, keyboardFrame: CGRect? = nil, animated: Bool) {
         let keyboardFrameInView = view.convert(keyboardFrame ?? keyboardInfo.keyboardEndFrame, from: nil)
         let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
         let intersection = safeAreaFrame.intersection(keyboardFrameInView)
@@ -95,13 +104,13 @@ public extension UIViewController {
         }
     }
     
-    func hideKeyboardOnTap() {
+    open func hideKeyboardOnTap() {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         recognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(recognizer)
     }
     
-    @objc func dismissKeyboard() {
+    @objc open func dismissKeyboard() {
         // Needs to be executed in the next run loop so that buttons have enough time to register being touched
         // before the keyboard disappears.
         DispatchQueue.main.async { [weak self] in
