@@ -127,13 +127,15 @@ open class NavigationCoordinator: Coordinator {
 // MARK: UINavigationControllerDelegate
 
 extension NavigationCoordinator: UINavigationControllerDelegate {
+    
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        // ensure the view controller is popping
-        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),
-            navigationController.viewControllers.contains(fromViewController) == false
-        else { return }
+        // see https://stackoverflow.com/questions/36503224/ios-app-freezes-on-pushviewcontroller
+        navigationController.interactivePopGestureRecognizer?.isEnabled = navigationController.viewControllers.count > 1
         
-        removePushedViewController(fromViewController)
+        // ensure the view controller is popping
+        if let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from), navigationController.viewControllers.contains(fromViewController) == false {
+            removePushedViewController(fromViewController)
+        }
     }
 }
 
