@@ -15,8 +15,6 @@ open class NavigationCoordinator: Coordinator {
         self.pushedViewControllers = WeakArray([])
         self.navigationController = navigationController
         
-        self.navigationController.interactivePopGestureRecognizer?.delegate = nil
-        
         super.init(rootViewController: navigationController)
         
         if self.navigationController.delegate == nil {
