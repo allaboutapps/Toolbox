@@ -190,7 +190,10 @@ public extension UIView {
     /// - Parameter offset: The offset that should be applied to all edges of the subview
     func pin(to view: UIView, offset: UIEdgeInsets) {
         view.addSubview(self)
-        alignEdges(view, insets: offset)
+        
+        self.withConstraints { view in
+            view.alignEdges(insets: offset)
+        }
     }
     
     /// Adds `self` to `view` as a subview and applies constraints to all edges
@@ -198,7 +201,10 @@ public extension UIView {
     /// - Parameter offset: The offset that should be applied to all edges of the subview
     func pin(to view: UIView, offset: NSDirectionalEdgeInsets = .zero) {
         view.addSubview(self)
-        alignEdges(view, insets: offset)
+        
+        self.withConstraints { view in
+            view.alignEdges(insets: offset)
+        }
     }
     
     /// Adds `view` to `self` as a subview and applies constraints to all edges
