@@ -104,6 +104,14 @@ open class Coordinator: NSObject {
         }
     }
     
+    /// This is used to forward `UIAdaptivePresentationControllerDelegate` functions.
+    /// Return here the object that should be responsible for the delegate callbacks
+    /// E.g.: RootViewController or TopViewController of a NavigationController
+    open var targetAdaptiveDelegate: UIAdaptivePresentationControllerDelegate? {
+        guard let delegate = rootViewController as? UIAdaptivePresentationControllerDelegate else { return nil }
+        return delegate
+    }
+    
     // MARK: - Start
     
     open func start() {}
@@ -124,14 +132,6 @@ extension Coordinator: UIAdaptivePresentationControllerDelegate {
         if let targetAdaptiveDelegate = targetAdaptiveDelegate {
             targetAdaptiveDelegate.presentationControllerDidDismiss?(presentationController)
         }
-    }
-    
-    /// This is used to forward `UIAdaptivePresentationControllerDelegate` functions.
-    /// Return here the object that should be responsible for the delegate callbacks
-    /// E.g.: RootViewController or TopViewController of a NavigationController
-    open var targetAdaptiveDelegate: UIAdaptivePresentationControllerDelegate? {
-        guard let delegate = rootViewController as? UIAdaptivePresentationControllerDelegate else { return nil }
-        return delegate
     }
     
     // MARK: Delegate Forwarding
