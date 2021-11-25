@@ -189,30 +189,16 @@ public extension UIView {
     /// - Parameter view: The superview to which the view should be added as a subview
     /// - Parameter offset: The offset that should be applied to all edges of the subview
     func pin(to view: UIView, offset: UIEdgeInsets) {
-        translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(self)
-        
-        NSLayoutConstraint.activate([
-            leftAnchor.constraint(equalTo: view.leftAnchor, constant: offset.left),
-            topAnchor.constraint(equalTo: view.topAnchor, constant: offset.top),
-            view.rightAnchor.constraint(equalTo: rightAnchor, constant: offset.right),
-            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: offset.bottom)
-        ])
+        alignEdges(view, insets: offset)
     }
     
     /// Adds `self` to `view` as a subview and applies constraints to all edges
     /// - Parameter view: The superview to which the view should be added as a subview
     /// - Parameter offset: The offset that should be applied to all edges of the subview
     func pin(to view: UIView, offset: NSDirectionalEdgeInsets = .zero) {
-        translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(self)
-        
-        NSLayoutConstraint.activate([
-            leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: offset.leading),
-            topAnchor.constraint(equalTo: view.topAnchor, constant: offset.top),
-            view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: offset.trailing),
-            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: offset.bottom)
-        ])
+        alignEdges(view, insets: offset)
     }
     
     /// Adds `view` to `self` as a subview and applies constraints to all edges
