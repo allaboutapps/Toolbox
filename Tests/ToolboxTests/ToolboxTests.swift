@@ -72,13 +72,17 @@ final class ToolboxTests: XCTestCase {
     
     func testDates() {
         
-        let isoDateInPast = "2020-09-22T10:43:31.227Z"
-        let isoDateInPastYear = "2015-03-22T10:43:31.227Z"
+        let isoDateInPast = "2020-09-22T10:43:31Z"
+        let isoDateInPastYear = "2015-03-22T10:43:31Z"
         
         let today = Date()
         
-        let datePast = Formatters.isoDateFormatter.date(from: isoDateInPast)!
-        let datePastYear = Formatters.isoDateFormatter.date(from: isoDateInPastYear)!
+        let isoDateFormatter = ISO8601DateFormatter()
+        
+        print(isoDateFormatter.string(from: Date()))
+        
+        let datePast = isoDateFormatter.date(from: isoDateInPast)!
+        let datePastYear = isoDateFormatter.date(from: isoDateInPastYear)!
         
         XCTAssertFalse(datePast.isDateYesterday)
         XCTAssertFalse(today.isDateTomorrow)
