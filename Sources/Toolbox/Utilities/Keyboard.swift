@@ -53,6 +53,14 @@ open class Keyboard {
                     self?.updateInfoWithNotification(notification)
                 }
             }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification, object: nil)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] notification in
+                self?.isShown = false
+                self?.updateInfoWithNotification(notification)
+            }
+            .store(in: &cancellables)
     }
     
     private func updateInfoWithNotification(_ notification: Notification, height: CGFloat? = nil) {
