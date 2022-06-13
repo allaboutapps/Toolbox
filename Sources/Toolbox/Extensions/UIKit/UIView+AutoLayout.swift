@@ -56,21 +56,23 @@ public extension UIView {
         return bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor, constant: constant)
     }
     
-    func alignEdges(_ layoutGuide: UILayoutGuide, insets: UIEdgeInsets) -> [NSLayoutConstraint] {
+    func alignEdges(_ layoutGuide: UILayoutGuide,
+                    edgeInsets: UIEdgeInsets) -> [NSLayoutConstraint] {
         return [
-            alignLeft(layoutGuide, constant: insets.left),
-            alignRight(layoutGuide, constant: -insets.right),
-            alignTop(layoutGuide, constant: insets.top),
-            alignBottom(layoutGuide, constant: -insets.bottom)
+            alignLeft(layoutGuide, constant: edgeInsets.left),
+            alignRight(layoutGuide, constant: -edgeInsets.right),
+            alignTop(layoutGuide, constant: edgeInsets.top),
+            alignBottom(layoutGuide, constant: -edgeInsets.bottom)
         ]
     }
     
-    func alignEdges(_ layoutGuide: UILayoutGuide, insets: NSDirectionalEdgeInsets = .zero) -> [NSLayoutConstraint] {
+    func alignEdges(_ layoutGuide: UILayoutGuide,
+                    directionalEdgeInsets: NSDirectionalEdgeInsets) -> [NSLayoutConstraint] {
         return [
-            alignLeading(layoutGuide, constant: insets.leading),
-            alignTrailing(layoutGuide, constant: -insets.trailing),
-            alignTop(layoutGuide, constant: insets.top),
-            alignBottom(layoutGuide, constant: -insets.bottom)
+            alignLeading(layoutGuide, constant: directionalEdgeInsets.leading),
+            alignTrailing(layoutGuide, constant: -directionalEdgeInsets.trailing),
+            alignTop(layoutGuide, constant: directionalEdgeInsets.top),
+            alignBottom(layoutGuide, constant: -directionalEdgeInsets.bottom)
         ]
     }
     
@@ -129,21 +131,23 @@ public extension UIView {
         ]
     }
     
-    func alignEdges(_ view: UIView? = nil, insets: UIEdgeInsets) -> [NSLayoutConstraint] {
+    func alignEdges(_ view: UIView? = nil,
+                    edgeInsets: UIEdgeInsets) -> [NSLayoutConstraint] {
         return [
-            alignLeft(view, constant: insets.left),
-            alignRight(view, constant: -insets.right),
-            alignTop(view, constant: insets.top),
-            alignBottom(view, constant: -insets.bottom)
+            alignLeft(view, constant: edgeInsets.left),
+            alignRight(view, constant: -edgeInsets.right),
+            alignTop(view, constant: edgeInsets.top),
+            alignBottom(view, constant: -edgeInsets.bottom)
         ]
     }
     
-    func alignEdges(_ view: UIView? = nil, insets: NSDirectionalEdgeInsets = .zero) -> [NSLayoutConstraint] {
+    func alignEdges(_ view: UIView? = nil,
+                    directionalEdgeInsets: NSDirectionalEdgeInsets) -> [NSLayoutConstraint] {
         return [
-            alignLeading(view, constant: insets.leading),
-            alignTrailing(view, constant: -insets.trailing),
-            alignTop(view, constant: insets.top),
-            alignBottom(view, constant: -insets.bottom)
+            alignLeading(view, constant: directionalEdgeInsets.leading),
+            alignTrailing(view, constant: -directionalEdgeInsets.trailing),
+            alignTop(view, constant: directionalEdgeInsets.top),
+            alignBottom(view, constant: -directionalEdgeInsets.bottom)
         ]
     }
     
@@ -157,8 +161,8 @@ public extension UIView {
     
     func constraintSize(_ size: CGSize) -> [NSLayoutConstraint] {
         return [
-            widthAnchor.constraint(equalToConstant: size.width),
-            heightAnchor.constraint(equalToConstant: size.height)
+            constraintWidth(size.width),
+            constraintHeight(size.height)
         ]
     }
     
@@ -184,41 +188,40 @@ public extension Array where Element: NSLayoutConstraint {
 
 public extension UIView {
     
-    /// Adds `self` to `view` as a subview and applies constraints to all edges i
-    /// It uses `left` and `right` for `leading` and `trailing` use `NSDirectionalEdgeInsets`
+    /// Adds `self` to `view` as a subview and applies constraints to all edges
     /// - Parameter view: The superview to which the view should be added as a subview
-    /// - Parameter offset: The offset that should be applied to all edges of the subview
-    func pin(to view: UIView, offset: UIEdgeInsets) {
+    /// - Parameter offset: The `UIEdgeInsets` that should be applied to all edges of the subview
+    func pin(to view: UIView, edgeInsets: UIEdgeInsets) {
         view.addSubview(self)
         
         self.withConstraints { view in
-            view.alignEdges(insets: offset)
+            view.alignEdges(edgeInsets: edgeInsets)
         }
     }
     
     /// Adds `self` to `view` as a subview and applies constraints to all edges
     /// - Parameter view: The superview to which the view should be added as a subview
-    /// - Parameter offset: The offset that should be applied to all edges of the subview
-    func pin(to view: UIView, offset: NSDirectionalEdgeInsets = .zero) {
+    /// - Parameter directionalEdgeInsets: The `NSDirectionalEdgeInsets` that should be applied to all edges of the subview
+    func pin(to view: UIView, directionalEdgeInsets: NSDirectionalEdgeInsets) {
         view.addSubview(self)
         
         self.withConstraints { view in
-            view.alignEdges(insets: offset)
+            view.alignEdges(directionalEdgeInsets: directionalEdgeInsets)
         }
     }
     
     /// Adds `view` to `self` as a subview and applies constraints to all edges
     /// - Parameter view: The subview that should be added to the superview
-    /// - Parameter offset: The offset that should be applied to all edges of the subview
-    func wrap(view: UIView, offset: UIEdgeInsets) {
-        view.pin(to: self, offset: offset)
+    /// - Parameter edgeInsets: The `UIEdgeInsets` insets that should be applied to all edges of the subview
+    func wrap(view: UIView, edgeInsets: UIEdgeInsets) {
+        view.pin(to: self, edgeInsets: edgeInsets)
     }
     
     /// Adds `view` to `self` as a subview and applies constraints to all edges
     /// - Parameter view: The subview that should be added to the superview
-    /// - Parameter offset: The offset that should be applied to all edges of the subview
-    func wrap(view: UIView, offset: NSDirectionalEdgeInsets = .zero) {
-        view.pin(to: self, offset: offset)
+    /// - Parameter directionalEdgeInsets: The `NSDirectionalEdgeInsets` that should be applied to all edges of the subview
+    func wrap(view: UIView, directionalEdgeInsets: NSDirectionalEdgeInsets) {
+        view.pin(to: self, directionalEdgeInsets: directionalEdgeInsets)
     }
 }
 
