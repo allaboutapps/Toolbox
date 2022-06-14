@@ -102,7 +102,7 @@ final class ToolboxTests: XCTestCase {
         
         let wrappingView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: 10)))
         let childView = UIView(frame: .zero)
-        wrappingView.wrap(view: childView, offset: UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
+        wrappingView.wrap(view: childView, edgeInsets: UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
         
         wrappingView.setNeedsLayout()
         wrappingView.layoutIfNeeded()
