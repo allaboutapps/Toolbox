@@ -10,15 +10,18 @@ open class Coordinator: NSObject {
     public var childCoordinators = [Coordinator]()
     
     public let rootViewController: UIViewController
+    var isPresented: Bool = false
     
     public init(rootViewController: UIViewController = UIViewController()) {
         self.rootViewController = rootViewController
         
         super.init()
-        
-        if rootViewController.presentationController?.delegate == nil {
-            rootViewController.presentationController?.delegate = self
-        }
+    }
+    
+    func prepareForModalPresentation() {
+        isPresented = true
+        guard rootViewController.presentationController?.delegate == nil else { fatalError("Coordinator need to set the delegate - for handling UIAdaptivePresentationControllerDelegate look into the ReadMe ") }
+        rootViewController.presentationController?.delegate = self
     }
     
     public func addChild(_ coordinator: Coordinator) {
@@ -45,6 +48,7 @@ open class Coordinator: NSObject {
     
     public func present(_ coordinator: Coordinator, animated: Bool, completion: (() -> Void)? = nil) {
         addChild(coordinator)
+        coordinator.prepareForModalPresentation()
         rootViewController.present(coordinator.rootViewController, animated: animated, completion: completion)
     }
     
@@ -100,6 +104,14 @@ open class Coordinator: NSObject {
         }
     }
     
+    /// This is used to forward `UIAdaptivePresentationControllerDelegate` functions.
+    /// Return here the object that should be responsible for the delegate callbacks
+    /// E.g.: RootViewController or TopViewController of a NavigationController
+    open var targetAdaptiveDelegate: UIAdaptivePresentationControllerDelegate? {
+        guard let delegate = rootViewController as? UIAdaptivePresentationControllerDelegate else { return nil }
+        return delegate
+    }
+    
     // MARK: - Start
     
     open func start() {}
@@ -116,6 +128,24 @@ extension Coordinator: UIAdaptivePresentationControllerDelegate {
         if let parentCoordinator = parentCoordinator {
             parentCoordinator.removeChild(self)
         }
+        
+        if let targetAdaptiveDelegate = targetAdaptiveDelegate {
+            targetAdaptiveDelegate.presentationControllerDidDismiss?(presentationController)
+        }
+    }
+    
+    // MARK: Delegate Forwarding
+    
+    public override func forwardingTarget(for aSelector: Selector!) -> Any? {
+        return targetAdaptiveDelegate
+    }
+    
+    public override func responds(to aSelector: Selector!) -> Bool {
+        if super.responds(to: aSelector) {
+            return true
+        }
+        
+        return targetAdaptiveDelegate?.responds(to: aSelector) ?? false
     }
 }
 

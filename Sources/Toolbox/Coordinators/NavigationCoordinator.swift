@@ -22,28 +22,30 @@ open class NavigationCoordinator: Coordinator {
         }
     }
     
-    public func removePushedViewController(_ viewController: UIViewController) {
+    open func removePushedViewController(_ viewController: UIViewController) {
         if let index = pushedViewControllers.firstIndex(of: viewController) {
             pushedViewControllers.remove(at: index)
             print("remove: \(pushedViewControllers.count) from \(self)")
             if let parentCoordinator = parentCoordinator as? NavigationCoordinator, pushedViewControllers.isEmpty {
                 parentCoordinator.removeChild(self)
                 navigationController.delegate = parentCoordinator
-                navigationController.presentationController?.delegate = parentCoordinator
+                if isPresented {
+                    navigationController.presentationController?.delegate = parentCoordinator
+                }
             }
         }
     }
     
     // MARK: ViewController
     
-    public func push(_ viewController: UIViewController, animated: Bool) {
+    open func push(_ viewController: UIViewController, animated: Bool) {
         pushedViewControllers.append(viewController)
         print("append: \(pushedViewControllers.count)")
         
         navigationController.pushViewController(viewController, animated: animated)
     }
     
-    @objc public func popViewController(animated: Bool) {
+    @objc open func popViewController(animated: Bool) {
         if let viewController = navigationController.popViewController(animated: animated) {
             removePushedViewController(viewController)
         }
@@ -73,12 +75,14 @@ open class NavigationCoordinator: Coordinator {
     
     // MARK: Coordinator
     
-    public func push(_ coordinator: Coordinator, animated: Bool) {
+    public func push(_ coordinator: NavigationCoordinator, animated: Bool) {
+        assert(coordinator.navigationController == navigationController, "Navigation Coordinator should only be pushed on the same UINavigationController! Hand over existing UINavigationController in init!")
         addChild(coordinator)
-        if let navigationCoordinator = coordinator as? NavigationCoordinator {
-            navigationController.delegate = navigationCoordinator // hand delegate to last coordinator
+        navigationController.delegate = coordinator // hand delegate to last coordinator
+        coordinator.isPresented = isPresented
+        if isPresented {
+            navigationController.presentationController?.delegate = coordinator
         }
-        navigationController.presentationController?.delegate = coordinator
     }
     
     public func popCoordinator(animated: Bool) {
@@ -120,13 +124,18 @@ open class NavigationCoordinator: Coordinator {
         output += tabs + "- VCs: [ \(viewControllers) ]\n"
         return output
     }
+    
+    open override var targetAdaptiveDelegate: UIAdaptivePresentationControllerDelegate? {
+        guard let delegate = navigationController.topViewController as? UIAdaptivePresentationControllerDelegate else { return nil }
+        return delegate
+    }
 }
 
 // MARK: UINavigationControllerDelegate
 
 extension NavigationCoordinator: UINavigationControllerDelegate {
     
-    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    open func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         // see https://stackoverflow.com/questions/36503224/ios-app-freezes-on-pushviewcontroller
         navigationController.interactivePopGestureRecognizer?.isEnabled = navigationController.viewControllers.count > 1
         

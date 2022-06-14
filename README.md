@@ -135,6 +135,27 @@ let label = UILabel().with {
 
 ```
 
+## Coordinators
+
+### UIAdaptivePresentationControllerDelegate
+
+Coordinators use `UIAdaptivePresentationControllerDelegate` to receive callbacks, when managed UIViewControllers are being dismissed.
+The delegate will only be set to the Coordinator, when a Coordinator is presented modally (through `present(_ coordinator: Coordinator, animated: Bool, completion: (() -> Void)? = nil)`). If the delegate is already set a fatalError is thrown, as this is a programming error. 
+
+#### Utilising UIAdaptivePresentationControllerDelegate
+
+If the `UIAdaptivePresentationControllerDelegate` callbacks are needed they can be implemented directly in the Coordinator itself.
+The delegate callbacks can be forwarded to another object via the `targetAdaptiveDelegate`. 
+Per default the `targetAdaptiveDelegate` is the `rootViewController` of the Coordinator.
+For the `NavigationCoordinator` the `topViewController` is the `targetAdaptiveDelegate`.      
+
+The `UIAdaptivePresentationControllerDelegate` is handed over, when pushing a `NavigationCoordinator` (e.g. calling the `push(_ coordinator: NavigationCoordinator, animated: Bool)` function)
+
+If you do not receive callbacks check: 
+* does your class / UIViewController confirm to `UIAdaptivePresentationControllerDelegate`
+* does the Coordinator intercept the callbacks (e.g. has implemented the function) 
+* is the `targetAdaptiveDelegate` set to the correct object
+* is another `NavigationCoordinator` pushed and intercepting the callbacks
 
 ## Installation
 
