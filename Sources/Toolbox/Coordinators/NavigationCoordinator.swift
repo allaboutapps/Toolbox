@@ -28,10 +28,7 @@ open class NavigationCoordinator: Coordinator {
             print("remove: \(pushedViewControllers.count) from \(self)")
             if let parentCoordinator = parentCoordinator as? NavigationCoordinator, pushedViewControllers.isEmpty {
                 parentCoordinator.removeChild(self)
-                navigationController.delegate = parentCoordinator
-                if isPresented {
-                    navigationController.presentationController?.delegate = parentCoordinator
-                }
+                handOverDelegates(to: parentCoordinator) // give delegate back to parent
             }
         }
     }
@@ -78,11 +75,9 @@ open class NavigationCoordinator: Coordinator {
     public func push(_ coordinator: NavigationCoordinator, animated: Bool) {
         assert(coordinator.navigationController == navigationController, "Navigation Coordinator should only be pushed on the same UINavigationController! Hand over existing UINavigationController in init!")
         addChild(coordinator)
-        navigationController.delegate = coordinator // hand delegate to last coordinator
+        
         coordinator.isPresented = isPresented
-        if isPresented {
-            navigationController.presentationController?.delegate = coordinator
-        }
+        handOverDelegates(to: coordinator) // hand delegate to next coordinator
     }
     
     public func popCoordinator(animated: Bool) {
@@ -92,7 +87,15 @@ open class NavigationCoordinator: Coordinator {
         if let childCoordinator = childCoordinator {
             removeChild(childCoordinator)
         }
-        navigationController.delegate = self
+        
+        handOverDelegates(to: self) // I am the delegate now
+    }
+    
+    func handOverDelegates(to navigationCoordinator: NavigationCoordinator) {
+        navigationController.delegate = navigationCoordinator
+        if isPresented {
+            navigationController.presentationController?.delegate = navigationCoordinator
+        }
     }
     
     // MARK: Reset
