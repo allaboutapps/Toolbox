@@ -2,9 +2,9 @@
 
 import UIKit
 
-public extension NSDirectionalEdgeInsets {
+public extension UIEdgeInsets {
     init(vertical: CGFloat = .zero, horizontal: CGFloat = .zero) {
-        self.init(top: vertical, leading: horizontal, bottom: vertical, trailing: horizontal)
+        self.init(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
     }
     
     init(_ value: CGFloat) {
@@ -12,12 +12,12 @@ public extension NSDirectionalEdgeInsets {
     }
     
     init(
-        leading: CGFloat = .zero,
+        left: CGFloat = .zero,
         top: CGFloat = .zero,
-        trailing: CGFloat = .zero,
+        right: CGFloat = .zero,
         bottom: CGFloat = .zero
     ) {
-        self.init(top: top, leading: leading, bottom: bottom, trailing: trailing)
+        self.init(top: top, left: left, bottom: bottom, right: right)
     }
 }
 
