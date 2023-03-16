@@ -2,7 +2,6 @@
 
 import UIKit
 
-@MainActor
 open class TabBarCoordinator: Coordinator {
     public let tabBarController: UITabBarController
     
