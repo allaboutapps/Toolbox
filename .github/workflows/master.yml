@@ -15,4 +15,4 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Run tests
-        run: xcodebuild test -destination 'name=iPhone 14' -scheme 'Toolbox-Package'
+        run: xcodebuild test -destination 'name=iPhone 14' -scheme 'Toolbox'
