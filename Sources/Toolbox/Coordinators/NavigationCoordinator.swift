@@ -2,6 +2,7 @@
 
 import UIKit
 
+@MainActor
 open class NavigationCoordinator: Coordinator {
     public var pushedViewControllers: WeakArray<UIViewController>
     public let navigationController: UINavigationController
@@ -11,9 +12,9 @@ open class NavigationCoordinator: Coordinator {
         return childCoordinators.first
     }
     
-    public init(navigationController: UINavigationController = UINavigationController()) {
+    public init(navigationController: UINavigationController? = nil) {
         self.pushedViewControllers = WeakArray([])
-        self.navigationController = navigationController
+        self.navigationController = navigationController ?? UINavigationController()
         
         super.init(rootViewController: navigationController)
         

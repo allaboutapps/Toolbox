@@ -88,7 +88,7 @@ open class Keyboard {
 @available(iOS 13.0, macOS 10.15, *)
 extension UIViewController {
     
-    open func updateSafeAreaInsets(keyboardInfo: Keyboard.Info, keyboardFrame: CGRect? = nil, animated: Bool) {
+    public func updateSafeAreaInsets(keyboardInfo: Keyboard.Info, keyboardFrame: CGRect? = nil, animated: Bool) {
         let keyboardFrameInView = view.convert(keyboardFrame ?? keyboardInfo.keyboardEndFrame, from: nil)
         let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
         let intersection = safeAreaFrame.intersection(keyboardFrameInView)
@@ -112,7 +112,7 @@ extension UIViewController {
         }
     }
     
-    open func hideKeyboardOnTap() {
+    public func hideKeyboardOnTap() {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         recognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(recognizer)
