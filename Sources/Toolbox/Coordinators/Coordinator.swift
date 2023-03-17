@@ -4,6 +4,7 @@ import UIKit
 
 // MARK: - Coordinator
 
+@MainActor
 open class Coordinator: NSObject {
     public weak var parentCoordinator: Coordinator?
     
@@ -12,8 +13,8 @@ open class Coordinator: NSObject {
     public let rootViewController: UIViewController
     var isPresented: Bool = false
     
-    public init(rootViewController: UIViewController = UIViewController()) {
-        self.rootViewController = rootViewController
+    public init(rootViewController: UIViewController? = nil) {
+        self.rootViewController = rootViewController ?? UIViewController()
         
         super.init()
     }

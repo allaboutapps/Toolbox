@@ -14,11 +14,5 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v1
 
-      - name: Force XCode 11.7
-        run: sudo xcode-select -switch /Applications/Xcode_11.7.app
-
-      - name: Generate xcodeproj
-        run: swift package generate-xcodeproj
-
       - name: Run tests
-        run: xcodebuild test -destination 'name=iPhone 11' -scheme 'Toolbox-Package'
+        run: xcodebuild test -destination 'name=iPhone 14' -scheme 'Toolbox'

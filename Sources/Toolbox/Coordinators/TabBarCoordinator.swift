@@ -5,9 +5,9 @@ import UIKit
 open class TabBarCoordinator: Coordinator {
     public let tabBarController: UITabBarController
     
-    public init(tabBarController: UITabBarController = UITabBarController()) {
-        self.tabBarController = tabBarController
-        super.init(rootViewController: tabBarController)
+    public init(tabBarController: UITabBarController? = nil) {
+        self.tabBarController = tabBarController ?? UITabBarController()
+        super.init(rootViewController: tabBarController!)
         self.tabBarController.delegate = self
     }
     

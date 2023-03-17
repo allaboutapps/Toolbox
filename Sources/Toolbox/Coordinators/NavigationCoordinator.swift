@@ -11,9 +11,9 @@ open class NavigationCoordinator: Coordinator {
         return childCoordinators.first
     }
     
-    public init(navigationController: UINavigationController = UINavigationController()) {
+    public init(navigationController: UINavigationController? = nil) {
         self.pushedViewControllers = WeakArray([])
-        self.navigationController = navigationController
+        self.navigationController = navigationController ?? UINavigationController()
         
         super.init(rootViewController: navigationController)
         
