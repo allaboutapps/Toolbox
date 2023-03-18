@@ -15,7 +15,7 @@ open class NavigationCoordinator: Coordinator {
         self.pushedViewControllers = WeakArray([])
         self.navigationController = navigationController ?? UINavigationController()
         
-        super.init(rootViewController: navigationController)
+        super.init(rootViewController: self.navigationController)
         
         if self.navigationController.delegate == nil {
             self.navigationController.delegate = self

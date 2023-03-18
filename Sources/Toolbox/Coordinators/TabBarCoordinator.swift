@@ -7,7 +7,7 @@ open class TabBarCoordinator: Coordinator {
     
     public init(tabBarController: UITabBarController? = nil) {
         self.tabBarController = tabBarController ?? UITabBarController()
-        super.init(rootViewController: tabBarController!)
+        super.init(rootViewController: self.tabBarController)
         self.tabBarController.delegate = self
     }
     
