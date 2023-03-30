@@ -1,11 +1,11 @@
-// swift-tools-version:5.2
+// swift-tools-version: 5.6
 
 import PackageDescription
 
 let package = Package(
     name: "Toolbox",
     platforms: [
-        .iOS(.v13),
+        .iOS(.v14),
         .macOS(.v10_15)
     ],
     products: [

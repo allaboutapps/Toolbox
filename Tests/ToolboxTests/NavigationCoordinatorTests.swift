@@ -18,7 +18,7 @@ final class NavigationCoordinatorTests: XCTestCase {
         }
         
         // Wait for the expectation to be fulfilled.
-        wait(for: [expectation], timeout: 10)
+        await fulfillment(of: [expectation], timeout: 10)
     }
     
     func testNavigationCoordinatorRootIsUINavigationController() async throws {
@@ -39,7 +39,7 @@ final class NavigationCoordinatorTests: XCTestCase {
         }
         
         // Wait for the expectation to be fulfilled.
-        wait(for: [expectation], timeout: 10)
+        await fulfillment(of: [expectation], timeout: 10)
     }
 
 }
