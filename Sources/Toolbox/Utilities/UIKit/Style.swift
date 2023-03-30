@@ -40,6 +40,28 @@ public struct NavigationBarStyle {
     public let buttonTitleAttributes: [NSAttributedString.Key: Any]?
     public let buttonDisabledAttributes: [NSAttributedString.Key: Any]?
     public let statusBarStyle: UIStatusBarStyle
+    
+    public init(
+        tintColor: UIColor?, 
+        barTintColor: UIColor?, 
+        backgroundStyle: BackgroundStyle?, 
+        backgroundColor: UIColor?, 
+        titleTextAttributes: [NSAttributedString.Key : Any]?,
+        largeTitleTextAttributes: [NSAttributedString.Key : Any]?, 
+        buttonTitleAttributes: [NSAttributedString.Key : Any]?, 
+        buttonDisabledAttributes: [NSAttributedString.Key : Any]?, 
+        statusBarStyle: UIStatusBarStyle
+    ) {
+        self.tintColor = tintColor
+        self.barTintColor = barTintColor
+        self.backgroundStyle = backgroundStyle
+        self.backgroundColor = backgroundColor
+        self.titleTextAttributes = titleTextAttributes
+        self.largeTitleTextAttributes = largeTitleTextAttributes
+        self.buttonTitleAttributes = buttonTitleAttributes
+        self.buttonDisabledAttributes = buttonDisabledAttributes
+        self.statusBarStyle = statusBarStyle
+    }
 }
 
 // MARK: - Helper
