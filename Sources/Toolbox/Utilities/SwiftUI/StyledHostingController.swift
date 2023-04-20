@@ -47,11 +47,15 @@ public class StyledHostingController<Content>: UIHostingController<Content> wher
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance
+        
+        if #available(iOS 15.0, *) {
+            navigationItem.compactScrollEdgeAppearance = appearance
+        }
     }
 }
 
 public class StyledNavigationController: UINavigationController {
-
+    
     override public var childForStatusBarStyle: UIViewController? {
         visibleViewController
     }
