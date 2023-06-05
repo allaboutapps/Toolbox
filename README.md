@@ -4,7 +4,7 @@
 [![Swift 5](https://img.shields.io/badge/swift5-Swift5-orange)](https://developer.apple.com/swift)
 [![SwiftUI](https://img.shields.io/badge/swiftUI-SwiftUI%20Ready-blue)](https://developer.apple.com/xcode/swiftui/)
 
-## What is toolbox
+## What is Toolbox
 
 Toolbox is a framework for iOS development with collected code snippets and extensions that is repeatedly copied from project to project. With the toolbox we want to save time and get rid of copy/paste stuff.
 
