@@ -54,7 +54,11 @@ open class Coordinator: NSObject {
     }
     
     public func dismissChildCoordinator(animated: Bool, completion: (() -> Void)? = nil) {
-        guard let coordinator = childCoordinators.first(where: { $0.rootViewController.presentingViewController != nil }) else { return }
+        guard let coordinator = childCoordinators.first(where: { $0.rootViewController.presentingViewController != nil })
+        else {
+            completion?()
+            return
+        }
         
         print("dismiss coordinator")
         
