@@ -8,7 +8,7 @@ final class NavigationCoordinatorTests: XCTestCase {
         
         // Switch to the main actor context.
         await MainActor.run {
-            let navCoordinator = NavigationCoordinator()
+            let navCoordinator = NavigationCoordinator(navigationController: .init())
             
             // Test your coordinator instance here, e.g.:
             XCTAssertNotNil(navCoordinator)
@@ -26,7 +26,7 @@ final class NavigationCoordinatorTests: XCTestCase {
         
         // Switch to the main actor context.
         await MainActor.run {
-            let navCoordinator = NavigationCoordinator()
+            let navCoordinator = NavigationCoordinator(navigationController: .init())
             
             // Test your coordinator instance here, e.g.:
             XCTAssertNotNil(navCoordinator)

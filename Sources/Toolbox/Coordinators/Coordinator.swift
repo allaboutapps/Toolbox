@@ -13,8 +13,8 @@ open class Coordinator: NSObject {
     public let rootViewController: UIViewController
     var isPresented: Bool = false
     
-    public init(rootViewController: UIViewController? = nil) {
-        self.rootViewController = rootViewController ?? UIViewController()
+    public init(rootViewController: UIViewController) {
+        self.rootViewController = rootViewController
         
         super.init()
     }
