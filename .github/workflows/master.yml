@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     name: Run unit tests
-    runs-on: macOS-latest
+    runs-on: macOS-13
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
