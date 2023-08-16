@@ -11,11 +11,11 @@ open class NavigationCoordinator: Coordinator {
         return childCoordinators.first
     }
     
-    public init(navigationController: UINavigationController? = nil) {
+    public init(navigationController: UINavigationController) {
         self.pushedViewControllers = WeakArray([])
-        self.navigationController = navigationController ?? UINavigationController()
+        self.navigationController = navigationController
         
-        super.init(rootViewController: self.navigationController)
+        super.init(rootViewController: navigationController)
         
         if self.navigationController.delegate == nil {
             self.navigationController.delegate = self

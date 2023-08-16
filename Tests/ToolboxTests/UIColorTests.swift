@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 @testable import Toolbox
 import XCTest
@@ -64,3 +66,5 @@ final class UIColorTests: XCTestCase {
         XCTAssertEqual(color.toHexString().uppercased(), "#ABCDEF")
     }
 }
+
+#endif
