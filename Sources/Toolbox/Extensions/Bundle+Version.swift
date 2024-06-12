@@ -23,6 +23,6 @@ public extension Bundle {
     }
     
     static var mainAppVersionWithBuildNumber: String {
-        "\(mainAppVersion ?? "-") (\(mainAppBuildNumber ?? "-")"
+        "\(mainAppVersion ?? "-") (\(mainAppBuildNumber ?? "-"))"
     }
 }
