@@ -11,11 +11,9 @@ public final class SharedAsyncChannel<Element: Sendable>: AsyncSequence, @unchec
     public init() {}
     
     public func send(_ element: Element) async {
-        lock.lock()
         for channel in storage.values {
             await channel.send(element)
         }
-        lock.unlock()
     }
 
     public func makeAsyncIterator() -> Iterator {
