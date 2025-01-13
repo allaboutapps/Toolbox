@@ -10,7 +10,7 @@ final class TabBarCoordinatorTests: XCTestCase {
         
         // Switch to the main actor context.
         await MainActor.run {
-            let tabBarCoordinator = TabBarCoordinator()
+            let tabBarCoordinator = TabBarCoordinator(tabBarController: UITabBarController())
             
             // Test your coordinator instance here, e.g.:
             XCTAssertNotNil(tabBarCoordinator)
