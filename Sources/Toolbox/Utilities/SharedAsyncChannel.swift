@@ -1,4 +1,3 @@
-#if canImport(AsyncAlgorithms)
 import AsyncAlgorithms
 import Foundation
 
@@ -45,4 +44,3 @@ public final class SharedAsyncChannel<Element: Sendable>: AsyncSequence, @unchec
         }
     }
 }
-#endif
