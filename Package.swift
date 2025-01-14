@@ -14,11 +14,14 @@ let package = Package(
             targets: ["Toolbox"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/apple/swift-async-algorithms.git", from: "1.0.0"),
     ],
     targets: [
         .target(
             name: "Toolbox",
-            dependencies: []),
+            dependencies: [
+                .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
+            ]),
         .testTarget(
             name: "ToolboxTests",
             dependencies: ["Toolbox"]),
