@@ -110,7 +110,11 @@ public struct HTMLView: View {
                     if let onLinkTap {
                         onLinkTap(url)
                     } else {
+                        #if canImport(UIKit)
                         UIApplication.shared.open(url)
+                        #elseif canImport(AppKit)
+                        NSWorkspace.shared.open(url)
+                        #endif
                     }
                     return .handled
                 })
@@ -150,7 +154,11 @@ public struct HTMLView: View {
                         if let onLinkTap {
                             onLinkTap(url)
                         } else {
+                            #if canImport(UIKit)
                             UIApplication.shared.open(url)
+                            #elseif canImport(AppKit)
+                            NSWorkspace.shared.open(url)
+                            #endif
                         }
                     }
                 }
