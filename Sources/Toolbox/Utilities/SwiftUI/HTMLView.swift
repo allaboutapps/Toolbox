@@ -18,6 +18,11 @@ public struct HTMLElementStyle {
         "ul": .init(font: .body, color: .primary),
         "a": .init(font: .body, color: .blue),
     ]
+    
+    public init(font: Font? = nil, color: Color? = nil) {
+        self.font = font
+        self.color = color
+    }
 }
 
 /// A SwiftUI view that renders HTML content with customizable styling.
