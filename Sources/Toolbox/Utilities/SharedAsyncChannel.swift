@@ -8,9 +8,10 @@ public final class SharedAsyncChannel<Element: Sendable>: AsyncSequence, @unchec
     private var storage = [UUID: AsyncChannel<Element>]()
 
     public init() {}
-    
+
     public func send(_ element: Element) async {
-        for channel in storage.values {
+        let channels = lock.withLock { storage }
+        for (_, channel) in channels {
             await channel.send(element)
         }
     }
@@ -18,16 +19,12 @@ public final class SharedAsyncChannel<Element: Sendable>: AsyncSequence, @unchec
     public func makeAsyncIterator() -> Iterator {
         let channel = AsyncChannel<Element>()
         let id = UUID()
-        lock.lock()
-        storage[id] = channel
-        lock.unlock()
+        lock.withLock { storage[id] = channel }
         return Iterator(innerIterator: channel.makeAsyncIterator(), parent: self, id: id)
     }
 
     private func gotCancelled(id: UUID) {
-        lock.lock()
-        storage[id] = nil
-        lock.unlock()
+        lock.withLock { storage[id] = nil }
     }
 
     public struct Iterator: AsyncIteratorProtocol {
