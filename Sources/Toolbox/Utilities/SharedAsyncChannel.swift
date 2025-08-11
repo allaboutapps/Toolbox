@@ -4,7 +4,7 @@ import Foundation
 public final class SharedAsyncChannel<Element: Sendable>: AsyncSequence, @unchecked Sendable {
     public typealias Element = Element
     public typealias AsyncIterator = Iterator
-    private let lock = NSLock()
+    private let lock = NSRecursiveLock()
     private var storage = [UUID: AsyncChannel<Element>]()
 
     public init() {}
